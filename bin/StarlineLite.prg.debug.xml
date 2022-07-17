@@ -7,90 +7,116 @@
         <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteDelegate.mc" id="2" lineNum="10" parent="globals/StarlineLiteDelegate" pc="268435479" symbol="onMenu"/>
         <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteDelegate.mc" id="2" lineNum="11" parent="globals/StarlineLiteDelegate" pc="268435483" symbol="onMenu"/>
         <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteDelegate.mc" id="2" lineNum="12" parent="globals/StarlineLiteDelegate" pc="268435567" symbol="onMenu"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteDelegate.mc" id="3" lineNum="4" parent="globals/StarlineLiteDelegate" pc="268436273" symbol="&lt;init&gt;"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteDelegate.mc" id="3" lineNum="4" parent="globals/StarlineLiteDelegate" pc="268436273" symbol="&lt;init&gt;"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteMenuDelegate.mc" id="5" lineNum="7" parent="globals/StarlineLiteMenuDelegate" pc="268435571" symbol="initialize"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteMenuDelegate.mc" id="5" lineNum="8" parent="globals/StarlineLiteMenuDelegate" pc="268435575" symbol="initialize"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteMenuDelegate.mc" id="6" lineNum="11" parent="globals/StarlineLiteMenuDelegate" pc="268435594" symbol="onMenuItem"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteMenuDelegate.mc" id="7" lineNum="5" parent="globals/StarlineLiteMenuDelegate" pc="268436360" symbol="&lt;init&gt;"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteMenuDelegate.mc" id="7" lineNum="5" parent="globals/StarlineLiteMenuDelegate" pc="268436360" symbol="&lt;init&gt;"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="9" lineNum="6" parent="globals/StarlineLiteView" pc="268435599" symbol="initialize"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="9" lineNum="7" parent="globals/StarlineLiteView" pc="268435603" symbol="initialize"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="10" lineNum="11" parent="globals/StarlineLiteView" pc="268435622" symbol="onLayout"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="10" lineNum="12" parent="globals/StarlineLiteView" pc="268435626" symbol="onLayout"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="11" lineNum="19" parent="globals/StarlineLiteView" pc="268435664" symbol="onShow"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="12" lineNum="23" parent="globals/StarlineLiteView" pc="268435669" symbol="onUpdate"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="12" lineNum="25" parent="globals/StarlineLiteView" pc="268435673" symbol="onUpdate"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="13" lineNum="31" parent="globals/StarlineLiteView" pc="268435694" symbol="onHide"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="14" lineNum="4" parent="globals/StarlineLiteView" pc="268436379" symbol="&lt;init&gt;"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="14" lineNum="4" parent="globals/StarlineLiteView" pc="268436379" symbol="&lt;init&gt;"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="16" lineNum="7" parent="globals/StarlineLiteApp" pc="268435699" symbol="initialize"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="16" lineNum="8" parent="globals/StarlineLiteApp" pc="268435703" symbol="initialize"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="17" lineNum="12" parent="globals/StarlineLiteApp" pc="268435722" symbol="onStart"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="18" lineNum="16" parent="globals/StarlineLiteApp" pc="268435727" symbol="onStop"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="19" lineNum="20" parent="globals/StarlineLiteApp" pc="268435732" symbol="getInitialView"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="19" lineNum="21" parent="globals/StarlineLiteApp" pc="268435736" symbol="getInitialView"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="20" lineNum="5" parent="globals/StarlineLiteApp" pc="268436341" symbol="&lt;init&gt;"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="20" lineNum="5" parent="globals/StarlineLiteApp" pc="268436341" symbol="&lt;init&gt;"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="21" lineNum="26" parent="globals" pc="268435804" symbol="getApp"/>
-        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="21" lineNum="27" parent="globals" pc="268435816" symbol="getApp"/>
-        <entry filename="Rez" id="23" lineNum="2" parent="globals/Rez/Drawables" pc="268436316" symbol="&lt;init&gt;"/>
-        <entry filename="Rez" id="24" lineNum="6" parent="globals/Rez/Fonts" pc="268436337" symbol="&lt;init&gt;"/>
-        <entry filename="Rez" id="25" lineNum="8" parent="globals/Rez/JsonData" pc="268436339" symbol="&lt;init&gt;"/>
-        <entry filename="Rez" id="26" lineNum="17" parent="globals/Rez/Layouts" pc="268435833" symbol="MainLayout"/>
-        <entry filename="Rez" id="26" lineNum="19" parent="globals/Rez/Layouts" pc="268435845" symbol="MainLayout"/>
-        <entry filename="Rez" id="26" lineNum="21" parent="globals/Rez/Layouts" pc="268435978" symbol="MainLayout"/>
-        <entry filename="Rez" id="27" lineNum="10" parent="globals/Rez/Layouts" pc="268436338" symbol="&lt;init&gt;"/>
-        <entry filename="Rez" id="28" lineNum="35" parent="globals/Rez/Menus/MainMenu" pc="268435996" symbol="initialize"/>
-        <entry filename="Rez" id="28" lineNum="36" parent="globals/Rez/Menus/MainMenu" pc="268436000" symbol="initialize"/>
-        <entry filename="Rez" id="28" lineNum="37" parent="globals/Rez/Menus/MainMenu" pc="268436056" symbol="initialize"/>
-        <entry filename="Rez" id="28" lineNum="38" parent="globals/Rez/Menus/MainMenu" pc="268436129" symbol="initialize"/>
-        <entry filename="Rez" id="28" lineNum="39" parent="globals/Rez/Menus/MainMenu" pc="268436202" symbol="initialize"/>
-        <entry filename="Rez" id="29" lineNum="33" parent="globals/Rez/Menus/MainMenu" pc="268436318" symbol="&lt;init&gt;"/>
-        <entry filename="Rez" id="29" lineNum="33" parent="globals/Rez/Menus/MainMenu" pc="268436318" symbol="&lt;init&gt;"/>
-        <entry filename="Rez" id="30" lineNum="26" parent="globals/Rez/Menus" pc="268436317" symbol="&lt;init&gt;"/>
-        <entry filename="Rez" id="31" lineNum="45" parent="globals/Rez/Strings" pc="268436340" symbol="&lt;init&gt;"/>
-        <entry filename="Rez" id="32" lineNum="1" parent="globals/Rez" pc="268436292" symbol="&lt;init&gt;"/>
-        <entry filename="Rez" id="32" lineNum="1" parent="globals/Rez" pc="268436292" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteDelegate.mc" id="3" lineNum="4" parent="globals/StarlineLiteDelegate" pc="268436746" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteDelegate.mc" id="3" lineNum="4" parent="globals/StarlineLiteDelegate" pc="268436746" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAbout.mc" id="5" lineNum="6" parent="globals/MenuAbout" pc="268435571" symbol="initialize"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAbout.mc" id="5" lineNum="7" parent="globals/MenuAbout" pc="268435575" symbol="initialize"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAbout.mc" id="6" lineNum="11" parent="globals/MenuAbout" pc="268435594" symbol="onLayout"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAbout.mc" id="6" lineNum="12" parent="globals/MenuAbout" pc="268435598" symbol="onLayout"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAbout.mc" id="7" lineNum="18" parent="globals/MenuAbout" pc="268435636" symbol="onShow"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAbout.mc" id="8" lineNum="22" parent="globals/MenuAbout" pc="268435641" symbol="onUpdate"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAbout.mc" id="8" lineNum="24" parent="globals/MenuAbout" pc="268435645" symbol="onUpdate"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAbout.mc" id="9" lineNum="30" parent="globals/MenuAbout" pc="268435666" symbol="onHide"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAbout.mc" id="10" lineNum="4" parent="globals/MenuAbout" pc="268436871" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAbout.mc" id="10" lineNum="4" parent="globals/MenuAbout" pc="268436871" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="12" lineNum="6" parent="globals/StarlineLiteView" pc="268435671" symbol="initialize"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="12" lineNum="7" parent="globals/StarlineLiteView" pc="268435675" symbol="initialize"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="13" lineNum="11" parent="globals/StarlineLiteView" pc="268435694" symbol="onLayout"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="13" lineNum="12" parent="globals/StarlineLiteView" pc="268435698" symbol="onLayout"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="14" lineNum="19" parent="globals/StarlineLiteView" pc="268435736" symbol="onShow"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="15" lineNum="23" parent="globals/StarlineLiteView" pc="268435741" symbol="onUpdate"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="15" lineNum="25" parent="globals/StarlineLiteView" pc="268435745" symbol="onUpdate"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="16" lineNum="31" parent="globals/StarlineLiteView" pc="268435766" symbol="onHide"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="17" lineNum="4" parent="globals/StarlineLiteView" pc="268436833" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteView.mc" id="17" lineNum="4" parent="globals/StarlineLiteView" pc="268436833" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="19" lineNum="7" parent="globals/StarlineLiteApp" pc="268435771" symbol="initialize"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="19" lineNum="8" parent="globals/StarlineLiteApp" pc="268435775" symbol="initialize"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="20" lineNum="12" parent="globals/StarlineLiteApp" pc="268435794" symbol="onStart"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="21" lineNum="16" parent="globals/StarlineLiteApp" pc="268435799" symbol="onStop"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="22" lineNum="20" parent="globals/StarlineLiteApp" pc="268435804" symbol="getInitialView"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="22" lineNum="21" parent="globals/StarlineLiteApp" pc="268435808" symbol="getInitialView"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="23" lineNum="5" parent="globals/StarlineLiteApp" pc="268436814" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="23" lineNum="5" parent="globals/StarlineLiteApp" pc="268436814" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="24" lineNum="26" parent="globals" pc="268435876" symbol="getApp"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/StarlineLiteApp.mc" id="24" lineNum="27" parent="globals" pc="268435888" symbol="getApp"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAboutDelegat.mc" id="26" lineNum="6" parent="globals/MenuAboutDelegat" pc="268435905" symbol="initialize"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAboutDelegat.mc" id="26" lineNum="7" parent="globals/MenuAboutDelegat" pc="268435909" symbol="initialize"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAboutDelegat.mc" id="27" lineNum="4" parent="globals/MenuAboutDelegat" pc="268436890" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MenuAboutDelegat.mc" id="27" lineNum="4" parent="globals/MenuAboutDelegat" pc="268436890" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MainMenuDelegate.mc" id="29" lineNum="6" parent="globals/MainMenuDelegate" pc="268435928" symbol="initialize"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MainMenuDelegate.mc" id="29" lineNum="7" parent="globals/MainMenuDelegate" pc="268435932" symbol="initialize"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MainMenuDelegate.mc" id="30" lineNum="10" parent="globals/MainMenuDelegate" pc="268435951" symbol="onSelect"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MainMenuDelegate.mc" id="30" lineNum="11" parent="globals/MainMenuDelegate" pc="268435955" symbol="onSelect"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MainMenuDelegate.mc" id="30" lineNum="12" parent="globals/MainMenuDelegate" pc="268435982" symbol="onSelect"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MainMenuDelegate.mc" id="30" lineNum="16" parent="globals/MainMenuDelegate" pc="268435995" symbol="onSelect"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MainMenuDelegate.mc" id="30" lineNum="18" parent="globals/MainMenuDelegate" pc="268436079" symbol="onSelect"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MainMenuDelegate.mc" id="31" lineNum="5" parent="globals/MainMenuDelegate" pc="268436852" symbol="&lt;init&gt;"/>
+        <entry filename="/Users/codergosha/Documents/CGProject/Watch/StarlineLite/source/MainMenu/MainMenuDelegate.mc" id="31" lineNum="5" parent="globals/MainMenuDelegate" pc="268436852" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="33" lineNum="2" parent="globals/Rez/Drawables" pc="268436789" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="34" lineNum="6" parent="globals/Rez/Fonts" pc="268436810" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="35" lineNum="8" parent="globals/Rez/JsonData" pc="268436812" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="36" lineNum="17" parent="globals/Rez/Layouts" pc="268436083" symbol="MainLayout"/>
+        <entry filename="Rez" id="36" lineNum="19" parent="globals/Rez/Layouts" pc="268436095" symbol="MainLayout"/>
+        <entry filename="Rez" id="36" lineNum="21" parent="globals/Rez/Layouts" pc="268436258" symbol="MainLayout"/>
+        <entry filename="Rez" id="37" lineNum="30" parent="globals/Rez/Layouts" pc="268436276" symbol="About"/>
+        <entry filename="Rez" id="37" lineNum="32" parent="globals/Rez/Layouts" pc="268436288" symbol="About"/>
+        <entry filename="Rez" id="37" lineNum="34" parent="globals/Rez/Layouts" pc="268436451" symbol="About"/>
+        <entry filename="Rez" id="38" lineNum="10" parent="globals/Rez/Layouts" pc="268436811" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="39" lineNum="48" parent="globals/Rez/Menus/MainMenu" pc="268436469" symbol="initialize"/>
+        <entry filename="Rez" id="39" lineNum="49" parent="globals/Rez/Menus/MainMenu" pc="268436473" symbol="initialize"/>
+        <entry filename="Rez" id="39" lineNum="50" parent="globals/Rez/Menus/MainMenu" pc="268436529" symbol="initialize"/>
+        <entry filename="Rez" id="39" lineNum="51" parent="globals/Rez/Menus/MainMenu" pc="268436602" symbol="initialize"/>
+        <entry filename="Rez" id="39" lineNum="52" parent="globals/Rez/Menus/MainMenu" pc="268436675" symbol="initialize"/>
+        <entry filename="Rez" id="40" lineNum="46" parent="globals/Rez/Menus/MainMenu" pc="268436791" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="40" lineNum="46" parent="globals/Rez/Menus/MainMenu" pc="268436791" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="41" lineNum="39" parent="globals/Rez/Menus" pc="268436790" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="42" lineNum="58" parent="globals/Rez/Strings" pc="268436813" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="43" lineNum="1" parent="globals/Rez" pc="268436765" symbol="&lt;init&gt;"/>
+        <entry filename="Rez" id="43" lineNum="1" parent="globals/Rez" pc="268436765" symbol="&lt;init&gt;"/>
     </pcToLineNum>
     <symbolTable>
         <entry id="8388639" module="true" symbol="Graphics"/>
         <entry id="8389346" symbol="text"/>
-        <entry id="10" object="true" symbol="StarlineLiteMenuDelegate"/>
         <entry id="8388632" method="true" symbol="&lt;init&gt;"/>
         <entry id="4" module="true" symbol="globals/Rez/Menus"/>
         <entry id="12" object="true" symbol="StarlineLiteApp"/>
-        <entry id="17" method="true" symbol="MainLayout"/>
-        <entry field="true" id="18" symbol="Unlock"/>
+        <entry id="19" method="true" symbol="MainLayout"/>
+        <entry id="14" object="true" symbol="MainMenuDelegate"/>
+        <entry field="true" id="24" symbol="ServerPass"/>
+        <entry field="true" id="21" symbol="ServerUser"/>
+        <entry field="true" id="22" symbol="Unlock"/>
         <entry field="true" id="8388611" module="true" symbol="Toybox"/>
         <entry id="9" object="true" symbol="StarlineLiteDelegate"/>
-        <entry field="true" id="20" symbol="AppName"/>
+        <entry field="true" id="25" symbol="AppName"/>
         <entry id="8" module="true" symbol="globals/Rez/Strings"/>
         <entry id="8389080" method="true" symbol="onMenu"/>
         <entry id="8388772" module="true" object="true" symbol="Fonts"/>
         <entry id="8388648" module="true" symbol="WatchUi"/>
         <entry id="2" module="true" symbol="globals/Rez"/>
+        <entry id="13" object="true" symbol="MenuAboutDelegat"/>
         <entry id="8389124" method="true" symbol="onUpdate"/>
         <entry field="true" id="8389065" symbol="locY"/>
         <entry field="true" id="8389064" symbol="locX"/>
+        <entry id="10" object="true" symbol="MenuAbout"/>
         <entry id="8388771" module="true" object="true" symbol="Drawables"/>
         <entry id="8389348" symbol="font"/>
-        <entry id="14" module="true" symbol="Menus"/>
+        <entry id="16" module="true" symbol="Menus"/>
         <entry id="8389275" method="true" symbol="getApp"/>
         <entry id="6" module="true" symbol="globals/Rez/Layouts"/>
         <entry id="8389122" method="true" symbol="onLayout"/>
         <entry id="8389349" symbol="justification"/>
         <entry id="7" module="true" symbol="globals/Rez/JsonData"/>
         <entry id="3" module="true" symbol="globals/Rez/Drawables"/>
-        <entry field="true" id="21" symbol="Lock"/>
-        <entry id="16" object="true" symbol="MainMenu"/>
-        <entry field="true" id="19" symbol="Settings"/>
+        <entry field="true" id="26" symbol="Lock"/>
+        <entry id="18" object="true" symbol="MainMenu"/>
+        <entry field="true" id="23" symbol="Settings"/>
         <entry id="11" object="true" symbol="StarlineLiteView"/>
         <entry id="8388644" module="true" symbol="System"/>
+        <entry id="8389619" method="true" symbol="onSelect"/>
         <entry id="8388769" module="true" object="true" symbol="Rez"/>
         <entry id="8388640" module="true" symbol="Lang"/>
         <entry id="8390088" module="true" object="true" symbol="JsonData"/>
-        <entry field="true" id="15" symbol="LauncherIcon"/>
+        <entry field="true" id="17" symbol="LauncherIcon"/>
         <entry id="8388610" symbol="statics"/>
         <entry id="8389123" method="true" symbol="onShow"/>
         <entry id="8389350" module="true" symbol="globals"/>
@@ -99,44 +125,54 @@
         <entry id="8389279" method="true" symbol="onStart"/>
         <entry id="8389280" method="true" symbol="getInitialView"/>
         <entry id="8389281" method="true" symbol="onStop"/>
-        <entry id="8389109" method="true" symbol="onMenuItem"/>
         <entry id="8389347" symbol="color"/>
-        <entry id="13" module="true" symbol="Layouts"/>
+        <entry field="true" id="20" method="true" symbol="About"/>
+        <entry id="15" module="true" symbol="Layouts"/>
         <entry id="5" module="true" symbol="globals/Rez/Fonts"/>
         <entry id="8389125" method="true" symbol="onHide"/>
         <entry id="8388635" module="true" symbol="Application"/>
         <entry field="true" id="8389642" symbol="title"/>
     </symbolTable>
     <localVars>
-        <entry arg="true" endPc="268435598" name="item" stackId="1" startPc="268435594"/>
-        <entry arg="true" endPc="268435663" name="dc" stackId="1" startPc="268435622"/>
-        <entry arg="true" endPc="268435693" name="dc" stackId="1" startPc="268435669"/>
-        <entry arg="true" endPc="268435726" name="state" stackId="1" startPc="268435722"/>
-        <entry arg="true" endPc="268435731" name="state" stackId="1" startPc="268435727"/>
-        <entry endPc="268435994" name="rez_cmp_local_text_2013061533" stackId="2" startPc="268435845"/>
-        <entry arg="true" endPc="268435995" name="dc" stackId="1" startPc="268435833"/>
+        <entry arg="true" endPc="268435635" name="dc" stackId="1" startPc="268435594"/>
+        <entry arg="true" endPc="268435665" name="dc" stackId="1" startPc="268435641"/>
+        <entry arg="true" endPc="268435735" name="dc" stackId="1" startPc="268435694"/>
+        <entry arg="true" endPc="268435765" name="dc" stackId="1" startPc="268435741"/>
+        <entry arg="true" endPc="268435798" name="state" stackId="1" startPc="268435794"/>
+        <entry arg="true" endPc="268435803" name="state" stackId="1" startPc="268435799"/>
+        <entry endPc="268436081" name="labelId" stackId="2" startPc="268435955"/>
+        <entry arg="true" endPc="268436082" name="item" stackId="1" startPc="268435951"/>
+        <entry endPc="268436274" name="rez_cmp_local_text_1053383456" stackId="2" startPc="268436095"/>
+        <entry arg="true" endPc="268436275" name="dc" stackId="1" startPc="268436083"/>
+        <entry endPc="268436467" name="rez_cmp_local_text_1650288855" stackId="2" startPc="268436288"/>
+        <entry arg="true" endPc="268436468" name="dc" stackId="1" startPc="268436276"/>
     </localVars>
     <annotations>
         <annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="LauncherIcon"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ServerUser"/>
         <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="Unlock"/>
         <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="Settings"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="ServerPass"/>
         <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="AppName"/>
         <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="Lock"/>
+        <annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="About"/>
     </annotations>
     <dataEntryOffsetMappings>
         <dataEntry label="globals" offset="87" parentId="" symbolId="globals" type="module"/>
-        <dataEntry label="globals/StarlineLiteDelegate" offset="174" parentId="globals" symbolId="StarlineLiteDelegate" type="class"/>
-        <dataEntry label="globals/Rez" offset="229" parentId="globals" symbolId="Rez" type="module"/>
-        <dataEntry label="globals/Rez/Drawables" offset="308" parentId="Rez" symbolId="Drawables" type="module"/>
-        <dataEntry label="globals/Rez/Menus" offset="347" parentId="Rez" symbolId="Menus" type="module"/>
-        <dataEntry label="globals/Rez/Menus/MainMenu" offset="386" parentId="Menus" symbolId="MainMenu" type="class"/>
-        <dataEntry label="globals/Rez/Fonts" offset="433" parentId="Rez" symbolId="Fonts" type="module"/>
-        <dataEntry label="globals/Rez/Layouts" offset="464" parentId="Rez" symbolId="Layouts" type="module"/>
-        <dataEntry label="globals/Rez/JsonData" offset="503" parentId="Rez" symbolId="JsonData" type="module"/>
-        <dataEntry label="globals/Rez/Strings" offset="534" parentId="Rez" symbolId="Strings" type="module"/>
-        <dataEntry label="globals/StarlineLiteApp" offset="597" parentId="globals" symbolId="StarlineLiteApp" type="class"/>
-        <dataEntry label="globals/StarlineLiteMenuDelegate" offset="668" parentId="globals" symbolId="StarlineLiteMenuDelegate" type="class"/>
-        <dataEntry label="globals/StarlineLiteView" offset="723" parentId="globals" symbolId="StarlineLiteView" type="class"/>
+        <dataEntry label="globals/StarlineLiteDelegate" offset="190" parentId="globals" symbolId="StarlineLiteDelegate" type="class"/>
+        <dataEntry label="globals/Rez" offset="245" parentId="globals" symbolId="Rez" type="module"/>
+        <dataEntry label="globals/Rez/Drawables" offset="324" parentId="Rez" symbolId="Drawables" type="module"/>
+        <dataEntry label="globals/Rez/Menus" offset="363" parentId="Rez" symbolId="Menus" type="module"/>
+        <dataEntry label="globals/Rez/Menus/MainMenu" offset="402" parentId="Menus" symbolId="MainMenu" type="class"/>
+        <dataEntry label="globals/Rez/Fonts" offset="449" parentId="Rez" symbolId="Fonts" type="module"/>
+        <dataEntry label="globals/Rez/Layouts" offset="480" parentId="Rez" symbolId="Layouts" type="module"/>
+        <dataEntry label="globals/Rez/JsonData" offset="527" parentId="Rez" symbolId="JsonData" type="module"/>
+        <dataEntry label="globals/Rez/Strings" offset="558" parentId="Rez" symbolId="Strings" type="module"/>
+        <dataEntry label="globals/StarlineLiteApp" offset="645" parentId="globals" symbolId="StarlineLiteApp" type="class"/>
+        <dataEntry label="globals/StarlineLiteView" offset="716" parentId="globals" symbolId="StarlineLiteView" type="class"/>
+        <dataEntry label="globals/MainMenuDelegate" offset="795" parentId="globals" symbolId="MainMenuDelegate" type="class"/>
+        <dataEntry label="globals/MenuAbout" offset="850" parentId="globals" symbolId="MenuAbout" type="class"/>
+        <dataEntry label="globals/MenuAboutDelegat" offset="929" parentId="globals" symbolId="MenuAboutDelegat" type="class"/>
     </dataEntryOffsetMappings>
     <functions>
         <functionEntry accessMode="public" endPc="268435478" name="initialize" parent="StarlineLiteDelegate" startPc="268435456">
@@ -145,88 +181,118 @@
         <functionEntry accessMode="public" endPc="268435570" name="onMenu" parent="StarlineLiteDelegate" startPc="268435479">
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436291" name="&lt;init&gt;" parent="StarlineLiteDelegate" startPc="268436273">
+        <functionEntry accessMode="protected" endPc="268436764" name="&lt;init&gt;" parent="StarlineLiteDelegate" startPc="268436746">
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="public" endPc="268435593" name="initialize" parent="StarlineLiteMenuDelegate" startPc="268435571">
+        <functionEntry accessMode="public" endPc="268435593" name="initialize" parent="MenuAbout" startPc="268435571">
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="public" endPc="268435598" name="onMenuItem" parent="StarlineLiteMenuDelegate" startPc="268435594">
+        <functionEntry accessMode="public" endPc="268435635" name="onLayout" parent="MenuAbout" startPc="268435594">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435640" name="onShow" parent="MenuAbout" startPc="268435636">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435665" name="onUpdate" parent="MenuAbout" startPc="268435641">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435670" name="onHide" parent="MenuAbout" startPc="268435666">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268436889" name="&lt;init&gt;" parent="MenuAbout" startPc="268436871">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435693" name="initialize" parent="StarlineLiteView" startPc="268435671">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435735" name="onLayout" parent="StarlineLiteView" startPc="268435694">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435740" name="onShow" parent="StarlineLiteView" startPc="268435736">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435765" name="onUpdate" parent="StarlineLiteView" startPc="268435741">
+            <param id="dc"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435770" name="onHide" parent="StarlineLiteView" startPc="268435766">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268436851" name="&lt;init&gt;" parent="StarlineLiteView" startPc="268436833">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435793" name="initialize" parent="StarlineLiteApp" startPc="268435771">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435798" name="onStart" parent="StarlineLiteApp" startPc="268435794">
+            <param id="state"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435803" name="onStop" parent="StarlineLiteApp" startPc="268435799">
+            <param id="state"/>
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435875" name="getInitialView" parent="StarlineLiteApp" startPc="268435804">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268436832" name="&lt;init&gt;" parent="StarlineLiteApp" startPc="268436814">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435904" name="getApp" startPc="268435876">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435927" name="initialize" parent="MenuAboutDelegat" startPc="268435905">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268436908" name="&lt;init&gt;" parent="MenuAboutDelegat" startPc="268436890">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268435950" name="initialize" parent="MainMenuDelegate" startPc="268435928">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436082" name="onSelect" parent="MainMenuDelegate" startPc="268435951">
             <param id="item"/>
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436378" name="&lt;init&gt;" parent="StarlineLiteMenuDelegate" startPc="268436360">
+        <functionEntry accessMode="protected" endPc="268436870" name="&lt;init&gt;" parent="MainMenuDelegate" startPc="268436852">
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="public" endPc="268435621" name="initialize" parent="StarlineLiteView" startPc="268435599">
+        <functionEntry accessMode="protected" endPc="268436789" name="&lt;init&gt;" parent="Drawables" startPc="268436789">
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="public" endPc="268435663" name="onLayout" parent="StarlineLiteView" startPc="268435622">
+        <functionEntry accessMode="protected" endPc="268436810" name="&lt;init&gt;" parent="Fonts" startPc="268436810">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="protected" endPc="268436812" name="&lt;init&gt;" parent="JsonData" startPc="268436812">
+            <documentation/>
+        </functionEntry>
+        <functionEntry accessMode="public" endPc="268436275" name="MainLayout" parent="Layouts" startPc="268436083">
             <param id="dc"/>
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="public" endPc="268435668" name="onShow" parent="StarlineLiteView" startPc="268435664">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="public" endPc="268435693" name="onUpdate" parent="StarlineLiteView" startPc="268435669">
+        <functionEntry accessMode="public" endPc="268436468" name="About" parent="Layouts" startPc="268436276">
             <param id="dc"/>
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="public" endPc="268435698" name="onHide" parent="StarlineLiteView" startPc="268435694">
+        <functionEntry accessMode="protected" endPc="268436811" name="&lt;init&gt;" parent="Layouts" startPc="268436811">
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436397" name="&lt;init&gt;" parent="StarlineLiteView" startPc="268436379">
+        <functionEntry accessMode="public" endPc="268436744" name="initialize" parent="MainMenu" startPc="268436469">
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="public" endPc="268435721" name="initialize" parent="StarlineLiteApp" startPc="268435699">
+        <functionEntry accessMode="protected" endPc="268436809" name="&lt;init&gt;" parent="MainMenu" startPc="268436791">
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="public" endPc="268435726" name="onStart" parent="StarlineLiteApp" startPc="268435722">
-            <param id="state"/>
+        <functionEntry accessMode="protected" endPc="268436790" name="&lt;init&gt;" parent="Menus" startPc="268436790">
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="public" endPc="268435731" name="onStop" parent="StarlineLiteApp" startPc="268435727">
-            <param id="state"/>
+        <functionEntry accessMode="protected" endPc="268436813" name="&lt;init&gt;" parent="Strings" startPc="268436813">
             <documentation/>
         </functionEntry>
-        <functionEntry accessMode="public" endPc="268435803" name="getInitialView" parent="StarlineLiteApp" startPc="268435732">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436359" name="&lt;init&gt;" parent="StarlineLiteApp" startPc="268436341">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="public" endPc="268435832" name="getApp" startPc="268435804">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436316" name="&lt;init&gt;" parent="Drawables" startPc="268436316">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436337" name="&lt;init&gt;" parent="Fonts" startPc="268436337">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436339" name="&lt;init&gt;" parent="JsonData" startPc="268436339">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="public" endPc="268435995" name="MainLayout" parent="Layouts" startPc="268435833">
-            <param id="dc"/>
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436338" name="&lt;init&gt;" parent="Layouts" startPc="268436338">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="public" endPc="268436271" name="initialize" parent="MainMenu" startPc="268435996">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436336" name="&lt;init&gt;" parent="MainMenu" startPc="268436318">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436317" name="&lt;init&gt;" parent="Menus" startPc="268436317">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436340" name="&lt;init&gt;" parent="Strings" startPc="268436340">
-            <documentation/>
-        </functionEntry>
-        <functionEntry accessMode="protected" endPc="268436315" name="&lt;init&gt;" parent="Rez" startPc="268436292">
+        <functionEntry accessMode="protected" endPc="268436788" name="&lt;init&gt;" parent="Rez" startPc="268436765">
             <documentation/>
         </functionEntry>
     </functions>

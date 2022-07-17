@@ -1,0 +1,8 @@
+<settings>
+	<setting propertyKey="@Properties.starline_API_user" title="@Strings.ServerUser">
+		<settingConfig type="alphaNumeric" required="true" />
+	</setting>
+	<setting propertyKey="@Properties.starline_API_pass" title="@Strings.ServerPass">
+		<settingConfig type="alphaNumeric" required="true" />
+	</setting>
+</settings>
