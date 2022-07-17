@@ -1,0 +1,5 @@
+<menu2 id="MainMenu" title="@Strings.AppName">
+  <menu-item id="Lock" label="@Strings.Lock" subLabel="Opening car"></menu-item>
+  <menu-item id="Unlock" label="@Strings.Unlock" subLabel="Closing car"></menu-item>
+    <menu-item id="Settings" label="@Strings.Settings"></menu-item>
+</menu2>
