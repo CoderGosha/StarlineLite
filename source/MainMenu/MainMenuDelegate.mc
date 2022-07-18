@@ -10,12 +10,12 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     function onSelect(item) {
         System.println(item.getId());
         var labelId = item.getId();
-        //dc.About
-        // if (labelId instanceof Rez.Menus.MainMenu.About)
-        // {
-    
-        WatchUi.pushView(new Rez.Layouts.MenuAbout(), new MenuAboutDelegat(), WatchUi.SLIDE_UP);
-        // }
+
+        if (labelId == :about)
+        {
+            WatchUi.pushView(new Rez.Layouts.MenuAbout(), new MenuAboutDelegat(), WatchUi.SLIDE_UP);
+            return true;
+        }
         return true;
     }
 

@@ -1,3 +1,3 @@
 <menu2 id="MainMenu" title="@Strings.AppName">
-  <menu-item id="About" label="@Strings.About"></menu-item>
+  <menu-item id="about" label="@Strings.About"></menu-item>
 </menu2>

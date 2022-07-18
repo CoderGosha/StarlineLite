@@ -15,11 +15,13 @@ class StarlineController
 {
     var mTimer;
     var mAppState as AppState;
+    var mCarState as CarState;
     // Initialize the controller
     function initialize() {
         // Allocate a timer
         mTimer = null;
         mAppState = IDLE;
+        mCarState = new CarState();
         //mAppState = AppState.IDLE;
     }
 
@@ -28,6 +30,10 @@ class StarlineController
         WatchUi.pushView(new WatchUi.ProgressBar("Saving...", null), null, WatchUi.SLIDE_DOWN);
         mTimer = new Timer.Timer();
         mTimer.start(method(:onExit), 3000, false);
+    }
+
+    function GetStatus() as CarState {
+        return mCarState;
     }
 
     // Handle timing out after exit
