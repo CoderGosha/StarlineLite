@@ -8,5 +8,5 @@
 	<property id="starline_API_URL" type="string">https://id.starline.ru/apiV3/application</property>
 
 	<property id="starline_car_name" type="string">Your Car</property>
-	<property id="starline_connected" type="boolean">false</property>
+	<property id="starline_API_is_auth" type="boolean">false</property>
 </properties>

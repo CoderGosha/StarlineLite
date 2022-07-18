@@ -9,7 +9,8 @@ public enum AppState {
     IDLE = "Idle",
     SEND_COMMAND = "Send Command",
     UPDATING = "Updating",
-    NULL_CREDENTIAL = "Null_Credential"
+    NULL_CREDENTIAL = "Null_Credential",
+    ERROR_RESPONSE = "ERROR_RESPONSE"
 }
 
 class StarlineController
@@ -21,6 +22,7 @@ class StarlineController
     var mLogin as String;
     var mPass as String;
     var mUrl as String;
+    var mStarlineClient as StarlineClient;
 
     // Initialize the controller
     function initialize() {
@@ -28,6 +30,7 @@ class StarlineController
         mTimer = null;
         AppState = IDLE;
         mCarState = new CarState();
+        mStarlineClient = new StarlineClient();
         //mAppState = AppState.IDLE;
     }
 
@@ -48,6 +51,8 @@ class StarlineController
         mLogin = Application.Properties.getValue("starline_API_user");
         mPass = Application.Properties.getValue("starline_API_pass");
         mUrl = Application.Properties.getValue("starline_API_URL");
+        
+        mStarlineClient.RefreshCredentials(mLogin, mPass, mUrl);
     }
 
     function CheckAccess() as Boolean
@@ -63,7 +68,12 @@ class StarlineController
     }
 
     function RefreshCarState() {
-        CheckAccess();
+        if (CheckAccess()){
+            mCarState = mStarlineClient.GetCarState();
+            if (mCarState.StatusCode != 200){
+                AppState = ERROR_RESPONSE;
+            }
+        }
     }
 
     // Handle timing out after exit

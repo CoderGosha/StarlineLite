@@ -8,12 +8,12 @@ public class CarState
 {
     public var LockStatus as LockStatus;
     public var CarName as String;
-    public var StarlineConnected as Boolean;
+
+    public var StatusCode as Integers; 
 
     function initialize() {
-        LockStatus = Undefined;
-        
+        LockStatus = Undefined;        
         CarName = Application.Properties.getValue("starline_car_name");
-        StarlineConnected = Application.Properties.getValue("starline_connected");
+        StatusCode = 0;
     }
 }

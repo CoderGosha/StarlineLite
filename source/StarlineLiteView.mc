@@ -39,19 +39,28 @@ class StarlineLiteView extends WatchUi.View {
             mLabelTemp.setText("");
             mLabelUpdate.setText("");
         }
-        else {
-            if (carState.StarlineConnected){
-                mLabelCarName.setText(carState.CarName);
+        else if (mController.AppState == ERROR_RESPONSE)
+        {
+            mLabelTitle.setText("Sync error");
+            mLabelTemp.setText("");
 
-                if (carState.LockStatus == Lock)
-                {
-                    mLabelTitle.setText("Lock");
-                } else if (carState.LockStatus == Unlock){
-                    mLabelTitle.setText("Unlock");
-                }
-                else{
-                    mLabelTitle.setText("Undefined");
-                }
+            if (carState.StatusCode == 403){
+                mLabelUpdate.setText("Auth error");
+            }
+            
+        }
+
+        else {
+            mLabelCarName.setText(carState.CarName);
+
+            if (carState.LockStatus == Lock)
+            {
+                mLabelTitle.setText("Lock");
+            } else if (carState.LockStatus == Unlock){
+                mLabelTitle.setText("Unlock");
+            }
+            else{
+                mLabelTitle.setText("Undefined");
             }
         }
         // Call the parent onUpdate function to redraw the layout
