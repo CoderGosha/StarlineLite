@@ -9,7 +9,7 @@ class StarlineLiteView extends WatchUi.View {
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.MainLayout(dc));
+        setLayout(Rez.Layouts.LockLayout(dc));
 
     }
 

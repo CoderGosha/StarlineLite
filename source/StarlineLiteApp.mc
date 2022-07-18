@@ -4,8 +4,11 @@ import Toybox.WatchUi;
 
 class StarlineLiteApp extends Application.AppBase {
 
+    var controller;
+
     function initialize() {
         AppBase.initialize();
+        controller = new $.StarlineController();
     }
 
     // onStart() is called on application start up

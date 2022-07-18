@@ -3,8 +3,11 @@ import Toybox.WatchUi;
 
 class StarlineLiteDelegate extends WatchUi.BehaviorDelegate {
 
+    var mController;
+
     function initialize() {
         BehaviorDelegate.initialize();
+        mController = Application.getApp().controller;
     }
 
     function onMenu() as Boolean {
