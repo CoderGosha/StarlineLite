@@ -2,11 +2,12 @@
     <string id="AppName">StarlineLite</string>
     <string id="Lock">Lock</string>
     <string id="Loading">Loading...</string>
+    <string id="Empty"></string>
     <string id="Unlock">Unlock</string>
     <string id="About">About</string>
     <string id="Settings">Settings</string>
     <string id="ServerUser">Username</string>
     <string id="ServerPass">Password</string>
-    <string id="Update">Updating state...</string>
+    <string id="Update">Synchronization...</string>
     <string id="LayoutLock">Lock/Unlock</string>
 </strings>

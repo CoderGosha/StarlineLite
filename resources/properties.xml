@@ -1,7 +1,12 @@
 <properties>
-	<property id="starline_API_user" type="string">user</property>
-	<property id="starline_API_pass" type="string">key</property>
+	<property id="starline_API_user_default" type="string">User</property>
+	<property id="starline_API_pass_default" type="string">Pass</property>
+	<property id="starline_API_user" type="string">User</property>
+	<property id="starline_API_pass" type="string">Pass</property>
 	<property id="starline_API_ID" type="string">6381</property>
 	<property id="starline_API_SECRET" type="string">JEsQbaMptguRjBZ9DgVX72cr63_YruM7</property>
 	<property id="starline_API_URL" type="string">https://id.starline.ru/apiV3/application</property>
+
+	<property id="starline_car_name" type="string">Your Car</property>
+	<property id="starline_connected" type="boolean">false</property>
 </properties>

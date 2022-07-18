@@ -8,19 +8,25 @@ using Toybox.System;
 public enum AppState {
     IDLE = "Idle",
     SEND_COMMAND = "Send Command",
-    UPDATING = "Updating"
+    UPDATING = "Updating",
+    NULL_CREDENTIAL = "Null_Credential"
 }
 
 class StarlineController
 {
+    public var AppState as AppState;
+
     var mTimer;
-    var mAppState as AppState;
     var mCarState as CarState;
+    var mLogin as String;
+    var mPass as String;
+    var mUrl as String;
+
     // Initialize the controller
     function initialize() {
         // Allocate a timer
         mTimer = null;
-        mAppState = IDLE;
+        AppState = IDLE;
         mCarState = new CarState();
         //mAppState = AppState.IDLE;
     }
@@ -32,8 +38,32 @@ class StarlineController
         mTimer.start(method(:onExit), 3000, false);
     }
 
-    function GetStatus() as CarState {
+    function GetCarState() as CarState {
+        // TODO async 
+        RefreshCarState();
         return mCarState;
+    }
+
+    function UpdateCredentials() {
+        mLogin = Application.Properties.getValue("starline_API_user");
+        mPass = Application.Properties.getValue("starline_API_pass");
+        mUrl = Application.Properties.getValue("starline_API_URL");
+    }
+
+    function CheckAccess() as Boolean
+    {
+        UpdateCredentials();
+        if ((mLogin == Application.Properties.getValue("starline_API_user_default")) 
+        || (mPass == Application.Properties.getValue("starline_API_pass_default"))){
+            AppState = NULL_CREDENTIAL;
+            return false;
+        }
+
+        return true;
+    }
+
+    function RefreshCarState() {
+        CheckAccess();
     }
 
     // Handle timing out after exit
