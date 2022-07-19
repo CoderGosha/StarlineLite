@@ -12,6 +12,7 @@ class StarlineClient{
 
     var mCode as String;
     var mCodeDate as Long;
+    var mRefreshCarState_callback;
 
     function initialize() {
         mIsAuth = Application.Properties.getValue("starline_API_is_auth");
@@ -83,18 +84,21 @@ class StarlineClient{
     }
 
      function onReceiveGetCode(responseCode as Number, data as Dictionary?) as Void {
+
         if (responseCode == 200) {
             System.println("Request Successful"); 
             GetToken();                  
         } else {
+            mCarState.StatusCode = responseCode;
             System.println("Response: " + responseCode);            // print response code
+            mRefreshCarState_callback.invoke();
         }
-
+        
     } 
 
     // Время жизни 4 часа
     function GetToken() {
-        
+        mRefreshCarState_callback.invoke();
     }
 
     // Время жизни 24 часа
@@ -124,7 +128,8 @@ class StarlineClient{
         return mCarState;
     }
 
-    function RefreshCarState() {
+    function RefreshCarState(refresh_callback) {
+        mRefreshCarState_callback = refresh_callback;
         if (CheckAuth()){
             // Запрос на обновление
         }

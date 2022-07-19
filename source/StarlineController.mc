@@ -24,6 +24,8 @@ class StarlineController
     var mUrl as String;
     var mStarlineClient as StarlineClient;
 
+    private var mRefreshCarStateCallback;
+
     // Initialize the controller
     function initialize() {
         // Allocate a timer
@@ -41,13 +43,29 @@ class StarlineController
         mTimer.start(method(:onExit), 3000, false);
     }
 
-    function GetCarState() as CarState {
-        if ((AppState == IDLE) && (CheckAccess()))
+    function RefreshCarState(refreshCarStateCallback) 
+    {
+        mRefreshCarStateCallback = refreshCarStateCallback;
+        if (((AppState == IDLE) || (AppState == ERROR_RESPONSE)) && (CheckAccess()))
         {
             AppState = UPDATING;
-            mStarlineClient.RefreshCarState();
+            mStarlineClient.RefreshCarState(method(:UpdateCarState));
         }
-        
+    }
+
+    function UpdateCarState() {
+        var state = mStarlineClient.GetCarState();
+        if (state.StatusCode != 200){
+            AppState = ERROR_RESPONSE;
+        }
+        else {
+            AppState = IDLE;
+        }
+        mRefreshCarStateCallback.invoke();
+        WatchUi.requestUpdate(); 
+    }
+
+    function GetCarState() as CarState {
         return mStarlineClient.GetCarState();
     }
 

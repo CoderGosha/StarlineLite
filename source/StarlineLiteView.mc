@@ -22,6 +22,7 @@ class StarlineLiteView extends WatchUi.View {
         mLabelTemp = View.findDrawableById("labelTemp");
         mLabelUpdate = View.findDrawableById("labelState");
         mLabelCarName = View.findDrawableById("labelCarName");
+        mController.RefreshCarState(method(:updateLabels));
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -29,9 +30,8 @@ class StarlineLiteView extends WatchUi.View {
     // loading resources into memory.
     function onShow() as Void {
     }
-
-    // Update the view
-    function onUpdate(dc as Dc) as Void {
+    
+    function updateLabels(){
         var carState = mController.GetCarState();
         if (mController.AppState == NULL_CREDENTIAL)
         {
@@ -69,6 +69,11 @@ class StarlineLiteView extends WatchUi.View {
                 mLabelTitle.setText("Undefined");
             }
         }
+    }
+
+    // Update the view
+    function onUpdate(dc as Dc) as Void {
+        updateLabels();
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
         
