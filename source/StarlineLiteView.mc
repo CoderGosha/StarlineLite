@@ -22,13 +22,14 @@ class StarlineLiteView extends WatchUi.View {
         mLabelTemp = View.findDrawableById("labelTemp");
         mLabelUpdate = View.findDrawableById("labelState");
         mLabelCarName = View.findDrawableById("labelCarName");
-        mController.RefreshCarState(method(:updateLabels));
+    
     }
 
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
+         mController.RefreshCarState();
     }
     
     function updateLabels(){
