@@ -1,14 +1,23 @@
+using Toybox.StringUtil;
+using Toybox.Cryptography;
 
 class StarlineClient{
     var mLogin as String;
     var mPass as String;
     var mUrl as String;
+    var mAppId as String;
+    var mAppSecret as String;
     var mIsAuth as Boolean;
     var mCarState as CarState;
+
+    var mCode as String;
+    var mCodeDate as Long;
 
     function initialize() {
         mIsAuth = Application.Properties.getValue("starline_API_is_auth");
         mCarState = new CarState();
+        mAppId = Application.Properties.getValue("starline_API_ID");
+        mAppSecret = Application.Properties.getValue("starline_API_SECRET");
     }
 
     function RefreshCredentials(login as String, pass as String, url as String) {
@@ -18,7 +27,88 @@ class StarlineClient{
     }
 
     function Auth() as Boolean{
-        mCarState.StatusCode = 403;
+        GetCode();
+    }
+    
+    function string_to_byte(string) {
+		var options = {
+			:fromRepresentation => StringUtil.REPRESENTATION_STRING_PLAIN_TEXT,
+			:toRepresentation => StringUtil.REPRESENTATION_BYTE_ARRAY,
+		};
+		return StringUtil.convertEncodedString(string, options);
+	}
+    function byte_to_hexstring(byte) {
+		var options = {
+			:fromRepresentation => StringUtil.REPRESENTATION_BYTE_ARRAY,
+			:toRepresentation => StringUtil.REPRESENTATION_STRING_HEX,
+		};
+		return StringUtil.convertEncodedString(byte, options);
+	}
+
+    function GetMD5(text) as String{
+        var hasher = new Cryptography.Hash({:algorithm => Cryptography.HASH_MD5});
+        hasher.update(string_to_byte(text));
+        var hash_byte = hasher.digest();
+
+        return byte_to_hexstring(hash_byte);
+    }
+    // Время жизни 1 час
+    function GetCode() {
+        var mCode = GetCacheProperty("starline_API_mCode", "starline_API_mCodeDate", 10 * 60 );
+        if (mCode != null)
+        {
+            System.println("Use Properties Code");
+            GetToken();
+        }
+        // Получаем новый код
+        System.println("Getting new code");
+        
+        var secret = GetMD5(mAppSecret);
+        var params = {                                              // set the parameters
+            "appId" => mAppId,
+            "secret" => secret
+        };
+        // var url = mUrl + "apiV3/application/getCode?appId=" +  mAppId + "&secret=" + secret;
+        var url = mUrl + "apiV3/application/getCode/";
+        var options = {                                             // set the options
+            :method => Communications.HTTP_REQUEST_METHOD_GET,      // set HTTP method
+            // set response type
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_URL_ENCODED
+        };
+
+        var responseCallback = method(:onReceiveGetCode);                  // set responseCallback to
+        // onReceive() method
+        // Make the Communications.makeWebRequest() call
+        Communications.makeWebRequest(url, params, options, method(:onReceiveGetCode));
+    }
+
+     function onReceiveGetCode(responseCode as Number, data as Dictionary?) as Void {
+        if (responseCode == 200) {
+            System.println("Request Successful"); 
+            GetToken();                  
+        } else {
+            System.println("Response: " + responseCode);            // print response code
+        }
+
+    } 
+
+    // Время жизни 4 часа
+    function GetToken() {
+        
+    }
+
+    // Время жизни 24 часа
+    function GetSlId() {
+        
+    }
+
+    function SetAuthbySlId() {
+        
+    }
+
+    function GetDataToLong() as Number {
+        // var now = new Time.Moment(Time.now().value());
+        return Time.now().value();
     }
 
     function CheckAuth() as Boolean {
@@ -31,9 +121,25 @@ class StarlineClient{
     }
 
     function GetCarState() as CarState {
+        return mCarState;
+    }
+
+    function RefreshCarState() {
         if (CheckAuth()){
             // Запрос на обновление
         }
-        return mCarState;
+    }
+
+    function GetCacheProperty(name_property, date_property, sec as Number) {
+        var mProperyDate = Application.Properties.getValue(date_property);
+        var mPropery = Application.Properties.getValue(name_property);
+        var current_time = GetDataToLong();
+        if ((current_time - sec) < mProperyDate)
+        {
+            System.println("Use properties cache");
+            return mPropery;
+        }
+
+        return null;
     }
 }

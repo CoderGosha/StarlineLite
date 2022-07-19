@@ -42,9 +42,13 @@ class StarlineController
     }
 
     function GetCarState() as CarState {
-        // TODO async 
-        RefreshCarState();
-        return mCarState;
+        if ((AppState == IDLE) && (CheckAccess()))
+        {
+            AppState = UPDATING;
+            mStarlineClient.RefreshCarState();
+        }
+        
+        return mStarlineClient.GetCarState();
     }
 
     function UpdateCredentials() {
@@ -65,15 +69,6 @@ class StarlineController
         }
 
         return true;
-    }
-
-    function RefreshCarState() {
-        if (CheckAccess()){
-            mCarState = mStarlineClient.GetCarState();
-            if (mCarState.StatusCode != 200){
-                AppState = ERROR_RESPONSE;
-            }
-        }
     }
 
     // Handle timing out after exit
