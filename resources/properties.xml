@@ -12,5 +12,8 @@
 
 	<property id="starline_API_mCodeDate" type="number">0</property>
 	<property id="starline_API_mCode" type="string"></property>
-
+	<property id="starline_API_mTokenDate" type="number">0</property>
+	<property id="starline_API_mToken" type="string"></property>
+	<property id="starline_API_mSlIdDate" type="number">0</property>
+	<property id="starline_API_mSlId" type="string"></property>
 </properties>
