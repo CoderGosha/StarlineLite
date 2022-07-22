@@ -18,4 +18,6 @@
 	<property id="starline_API_mSlId" type="string"></property>
 	<property id="starline_API_mUserIdDate" type="number">0</property>
 	<property id="starline_API_mUserId" type="string"></property>
+	<property id="starline_API_mSlnetDate" type="number">0</property>
+	<property id="starline_API_mSlnet" type="string"></property>
 </properties>

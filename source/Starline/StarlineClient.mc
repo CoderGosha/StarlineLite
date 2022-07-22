@@ -14,6 +14,7 @@ class StarlineClient{
     var mToken as String;
     var mSlid as String;
     var mUserId as String;
+    var mSlnet as String;
     var mRefreshCarState_callback;
 
     function initialize() {
@@ -193,7 +194,7 @@ class StarlineClient{
         if (mSlid != null)
         {
             System.println("Use properties token");
-            //GetSlId();
+            return GetSlnetToken();
         }
 
         // Получаем новый код
@@ -238,9 +239,67 @@ class StarlineClient{
                     mUserId = userId;
                     SetCacheProperty("starline_API_mSlId", "starline_API_mSlIdDate", slid, 1 * 60 * 60);
                     SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 1 * 60 * 60);
-                    return;
+                    return GetSlnetToken();
                 }
             }
+                            
+        } else {
+            mCarState.StatusCode = responseCode;
+            System.println("Response: " + responseCode + ":" + data);            // print response code
+            return;
+        }
+
+        mCarState.StatusCode = 500;
+        System.println("Error parse response" + data);            // print response code
+        
+    } 
+
+    // Время 24 жизни - часа
+    function GetSlnetToken() {
+        mSlnet = GetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", 10 * 60 );
+        if (mSlnet != null)
+        {
+            System.println("Use properties token");
+            // TODO Вызывать нужный метод! 
+        }
+
+        // Получаем новый код
+        System.println("Getting new slnet");
+        
+        var params = {                                              // set the parameters
+            "slid_token" => mSlid
+        };
+
+        var url = "https://developer.starline.ru/json/v2/auth.slid";
+
+        var options = {                                             // set the options
+            :method => Communications.HTTP_REQUEST_METHOD_POST,      // set HTTP method
+            :headers => {                                           // set headers
+             "Content-Type" => Communications.REQUEST_CONTENT_TYPE_JSON},
+            // set response type
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        };
+
+        var responseCallback = method(:onReceiveGetSlnet);                  // set responseCallback to
+        // onReceive() method
+        // Make the Communications.makeWebRequest() call
+        //Communications.makeWebRequest(url, parameters, options, responseCallback)
+        Communications.makeWebRequest(url, params, options, method(:onReceiveGetSlnet));
+    }
+
+    function onReceiveGetSlnet(responseCode as Number, data as Dictionary?) as Void {
+
+        if (responseCode == 200) {
+            System.println("Request Successful"); 
+            var code = data.get("code");
+            if (code.toNumber() == 200){
+                mSlnet = data.get("nchan_id");
+                SetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", mSlnet, 24 * 60 * 60);
+                System.println("Response new slnet code: " + mSlnet);
+                // TODO Вызывать нужный метод! 
+                return;
+            }
+
                             
         } else {
             mCarState.StatusCode = responseCode;
