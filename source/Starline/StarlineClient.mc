@@ -69,17 +69,21 @@ class StarlineClient{
             "appId" => mAppId,
             "secret" => secret
         };
-        // var url = mUrl + "apiV3/application/getCode?appId=" +  mAppId + "&secret=" + secret;
-        var url = mUrl + "apiV3/application/getCode/";
+
+        var url = mUrl + "/apiV3/application/getCode";
+
         var options = {                                             // set the options
             :method => Communications.HTTP_REQUEST_METHOD_GET,      // set HTTP method
+            :headers => {                                           // set headers
+            "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED},
             // set response type
-            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_URL_ENCODED
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
         };
 
         var responseCallback = method(:onReceiveGetCode);                  // set responseCallback to
         // onReceive() method
         // Make the Communications.makeWebRequest() call
+        //Communications.makeWebRequest(url, parameters, options, responseCallback)
         Communications.makeWebRequest(url, params, options, method(:onReceiveGetCode));
     }
 
@@ -87,12 +91,29 @@ class StarlineClient{
 
         if (responseCode == 200) {
             System.println("Request Successful"); 
-            GetToken();                  
+            var states = data.get("state");
+            if (states == 1)
+            {    
+                var app_code = data.get("desc").get("code");
+                if (app_code != null){
+                    System.println("Got new app code: " + app_code); 
+                    mCode = app_code;
+                    mCodeDate = GetDataToLong();
+                    SetCacheProperty("starline_API_mCode", "starline_API_mCodeDate", mCode );
+                    return GetToken(); 
+                }
+            }
+                            
         } else {
             mCarState.StatusCode = responseCode;
             System.println("Response: " + responseCode);            // print response code
             mRefreshCarState_callback.invoke();
+            return;
         }
+
+        mCarState.StatusCode = 500;
+        System.println("Error parse response");            // print response code
+        mRefreshCarState_callback.invoke();
         
     } 
 
@@ -146,5 +167,11 @@ class StarlineClient{
         }
 
         return null;
+    }
+
+    function SetCacheProperty(name_property, date_property, value) {
+        var current_time = GetDataToLong();
+        Application.Properties.setValue(name_property, value);
+        Application.Properties.setValue(date_property, current_time);
     }
 }
