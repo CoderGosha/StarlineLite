@@ -13,6 +13,7 @@ class StarlineClient{
     var mCode as String;
     var mToken as String;
     var mSlid as String;
+    var mUserId as String;
     var mRefreshCarState_callback;
 
     function initialize() {
@@ -30,7 +31,7 @@ class StarlineClient{
 
     function Auth() as Boolean{
         GetCode();
-        mRefreshCarState_callback.invoke();
+
     }
     
     function string_to_byte(string) {
@@ -65,7 +66,7 @@ class StarlineClient{
     }
     // Время жизни 1 час
     function GetCode() {
-        //mCode = GetCacheProperty("starline_API_mCode", "starline_API_mCodeDate", 10 * 60 );
+        mCode = GetCacheProperty("starline_API_mCode", "starline_API_mCodeDate", 10 * 60 );
         if (mCode != null)
         {
             System.println("Use Properties Code");
@@ -186,7 +187,7 @@ class StarlineClient{
         
     } 
 
-    // Время жизни 24 часа
+    // Время жизни - часа
     function GetSlId() {
         mSlid = GetCacheProperty("starline_API_mSlId", "starline_API_mSlIdDate", 10 * 60 );
         if (mSlid != null)
@@ -209,7 +210,7 @@ class StarlineClient{
         var options = {                                             // set the options
             :method => Communications.HTTP_REQUEST_METHOD_POST,      // set HTTP method
             :headers => {                                           // set headers
-            "Content-Type" => Communications.REQUEST_CONTENT_TYPE_JSON,
+           // "Content-Type" => Communications.REQUEST_CONTENT_TYPE_JSON,
             "token"=> mToken },
             // set response type
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
@@ -226,7 +227,20 @@ class StarlineClient{
 
         if (responseCode == 200) {
             System.println("Request Successful"); 
-
+            var states = data.get("state");
+            if (states == 1)
+            {    
+                var slid = data.get("desc").get("user_token");
+                var userId = data.get("desc").get("id");
+                if (slid != null){
+                    System.println("Got new slid: " + slid); 
+                    mSlid = slid;
+                    mUserId = userId;
+                    SetCacheProperty("starline_API_mSlId", "starline_API_mSlIdDate", slid, 1 * 60 * 60);
+                    SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 1 * 60 * 60);
+                    return;
+                }
+            }
                             
         } else {
             mCarState.StatusCode = responseCode;

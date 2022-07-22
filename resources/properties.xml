@@ -16,4 +16,6 @@
 	<property id="starline_API_mToken" type="string"></property>
 	<property id="starline_API_mSlIdDate" type="number">0</property>
 	<property id="starline_API_mSlId" type="string"></property>
+	<property id="starline_API_mUserIdDate" type="number">0</property>
+	<property id="starline_API_mUserId" type="string"></property>
 </properties>
