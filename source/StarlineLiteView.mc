@@ -59,6 +59,7 @@ class StarlineLiteView extends WatchUi.View {
 
         else {
             mLabelCarName.setText(carState.CarName);
+            mLabelTemp.setText(carState.TempData);
 
             if (carState.LockStatus == Lock)
             {

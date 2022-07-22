@@ -264,13 +264,11 @@ class StarlineAuthService{
             if (states == 1)
             {    
                 var slid = data.get("desc").get("user_token");
-                var userId = data.get("desc").get("id");
                 if (slid != null){
                     System.println("Got new slid: " + slid); 
                     mSlid = slid;
-                    mUserId = userId;
                     SetCacheProperty("starline_API_mSlId", "starline_API_mSlIdDate", slid, 1 * 60 * 60);
-                    SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 1 * 60 * 60);
+                    
                     return GetSlnetToken();
                 }
             }
@@ -327,6 +325,8 @@ class StarlineAuthService{
             if (code.toNumber() == 200){
                 mSlnet = data.get("nchan_id");
                 mSlnetDate = GetDataToLong() + 24 * 60 * 60;
+                mUserId = data.get("user_id");
+                SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 1 * 60 * 60);
                 SetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", mSlnet, 24 * 60 * 60);
                 System.println("Response new slnet code: " + mSlnet);
                 mAuth_callback.invoke();

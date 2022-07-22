@@ -36,11 +36,11 @@ class StarlineClient
         // У нас точно есть токен - поэтому выполянем 
         var token = mAuthService.GetSlnet(method(:OnRefreshCarState));
         var userId = mAuthService.GetUserId();
-
+        token = "DE6AE702FBB72475DC446CAE0EB84109";
         var slnet = "slnet="+ token;
 
-        var url = "https://developer.starline.ru/json/v3/user/" + userId +"/data";
-
+        //var url = "https://developer.starline.ru/json/v3/user/" + userId +"/data";
+        var url = "https://developer.starline.ru/json/v2/user/"+ userId +"/user_info";
         var options = {                                             // set the options
             :method => Communications.HTTP_REQUEST_METHOD_GET,      // set HTTP method
             :headers => {                                           // set headers
@@ -64,8 +64,14 @@ class StarlineClient
             System.println("Request Successful"); 
             var code = data.get("code");
             if (code.toNumber() == 200){
-
-                //mRefreshCarState_callback.invoke();
+                var device = data.get("devices");
+                if ((device != null) && (device.size() > 0)){
+                    mCarState.StatusCode = 200;
+                    mCarState.CarName = device[0].get("alias");
+                    var temp = "Inside:" + device[0].get("ctemp") + "| Engine: " + device[0].get("etemp");
+                    mCarState.TempData = temp;
+                }
+                mRefreshCarState_callback.invoke();
                 return;
             }
                             
