@@ -64,7 +64,8 @@ class StarlineAuthService{
             return mUserId;
         }
 
-        return GetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", 10 * 60 );
+        mUserId = GetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", 10 * 60 );
+        return mUserId;
     }
 
     function string_to_byte(string) {
@@ -99,12 +100,6 @@ class StarlineAuthService{
     }
     // Время жизни 1 час
     function GetCode() {
-        mCode = GetCacheProperty("starline_API_mCode", "starline_API_mCodeDate", 10 * 60 );
-        if (mCode != null)
-        {
-            System.println("Use Properties Code");
-            return GetToken();
-        }
         // Получаем новый код
         System.println("Getting new code");
         
@@ -142,7 +137,6 @@ class StarlineAuthService{
                 if (app_code != null){
                     System.println("Got new app code: " + app_code); 
                     mCode = app_code;
-                    SetCacheProperty("starline_API_mCode", "starline_API_mCodeDate", mCode, 1 * 60 * 60);
                     return GetToken(); 
                 }
             }
@@ -160,12 +154,6 @@ class StarlineAuthService{
 
     // Время жизни 4 часа
     function GetToken() {
-        mToken = GetCacheProperty("starline_API_mToken", "starline_API_mTokenDate", 10 * 60 );
-        if (mToken != null)
-        {
-            System.println("Use properties token");
-            return GetSlId();
-        }
 
         // Получаем новый код
         System.println("Getting new token");
@@ -204,7 +192,6 @@ class StarlineAuthService{
                 if (token != null){
                     System.println("Got new token: " + token); 
                     mToken = token;
-                    SetCacheProperty("starline_API_mToken", "starline_API_mTokenDate", mToken, 4 * 60 * 60);
                     return GetSlId(); 
                 }
             }
@@ -222,12 +209,6 @@ class StarlineAuthService{
 
     // Время жизни - часа
     function GetSlId() {
-        mSlid = GetCacheProperty("starline_API_mSlId", "starline_API_mSlIdDate", 10 * 60 );
-        if (mSlid != null)
-        {
-            System.println("Use properties token");
-            return GetSlnetToken();
-        }
 
         // Получаем новый код
         System.println("Getting new slid");
@@ -267,8 +248,7 @@ class StarlineAuthService{
                 if (slid != null){
                     System.println("Got new slid: " + slid); 
                     mSlid = slid;
-                    SetCacheProperty("starline_API_mSlId", "starline_API_mSlIdDate", slid, 1 * 60 * 60);
-                    
+
                     return GetSlnetToken();
                 }
             }
@@ -378,8 +358,8 @@ class StarlineAuthService{
     }
 
     function SetCacheProperty(name_property, date_property, value, sec as Number) {
-        var current_time = GetDataToLong();
+        var current_time = GetDataToLong() + sec;
         Application.Properties.setValue(name_property, value);
-        Application.Properties.setValue(date_property, current_time + sec);
+        Application.Properties.setValue(date_property, current_time);
     }
 }

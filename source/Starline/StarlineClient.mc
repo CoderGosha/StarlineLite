@@ -66,10 +66,8 @@ class StarlineClient
             if (code.toNumber() == 200){
                 var device = data.get("devices");
                 if ((device != null) && (device.size() > 0)){
-                    mCarState.StatusCode = 200;
-                    mCarState.CarName = device[0].get("alias");
-                    var temp = "Inside:" + device[0].get("ctemp") + "| Engine: " + device[0].get("etemp");
-                    mCarState.TempData = temp;
+                    mCarState.SetProperty(device[0]);
+
                 }
                 mRefreshCarState_callback.invoke();
                 return;

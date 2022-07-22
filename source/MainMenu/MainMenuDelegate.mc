@@ -2,8 +2,20 @@ import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
 
+class MenuProgressDelegate extends WatchUi.BehaviorDelegate {
+    function initialize() {
+        BehaviorDelegate.initialize();
+    }
+
+    function onBack() {
+        return true;
+    }
+}
+
 class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     var mController;
+    var progressBar;
+
     function initialize() {
          Menu2InputDelegate.initialize();
          mController = Application.getApp().controller;
@@ -21,6 +33,17 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         else if (labelId == :lock)
         {
             mController.SendCommand(CommandLock);
+            return true;
+        }
+        else if (labelId == :refresh)
+        {
+            mController.RefreshCarState();
+            progressBar = new WatchUi.ProgressBar(
+                "Processing...",
+                null
+            );
+            WatchUi.pushView(progressBar, new MenuProgressDelegate(), WatchUi.SLIDE_DOWN);
+       
             return true;
         }
         return true;

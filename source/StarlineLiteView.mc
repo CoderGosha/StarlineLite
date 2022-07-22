@@ -59,7 +59,10 @@ class StarlineLiteView extends WatchUi.View {
 
         else {
             mLabelCarName.setText(carState.CarName);
-            mLabelTemp.setText(carState.TempData);
+
+            var tempData = "Inside:" + carState.TempInside + " | Engine: " + carState.TempEngine;
+
+            mLabelTemp.setText(tempData);
 
             if (carState.LockStatus == Lock)
             {
@@ -70,6 +73,8 @@ class StarlineLiteView extends WatchUi.View {
             else{
                 mLabelTitle.setText("Undefined");
             }
+
+            mLabelUpdate.setText("Update: " + carState.GetUpdateTime());
         }
     }
 

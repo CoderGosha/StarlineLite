@@ -1,4 +1,5 @@
 <menu2 id="MainMenu" title="@Strings.AppName">
+  <menu-item id="refresh" label="Refresh"></menu-item>
   <menu-item id="lock" label="@Strings.Lock"></menu-item>
   <menu-item id="about" label="@Strings.About"></menu-item>
 </menu2>
