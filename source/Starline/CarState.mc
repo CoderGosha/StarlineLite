@@ -8,8 +8,8 @@ public class CarState
 {
     public var LockStatus as LockStatus;
     public var CarName as String;
-
     public var StatusCode as Integers; 
+    public var DeviceId as String;
 
     function initialize() {
         LockStatus = Undefined;        

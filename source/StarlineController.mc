@@ -34,11 +34,8 @@ class StarlineController
         //mAppState = AppState.IDLE;
     }
 
-    function SendCommand() {
-
-        WatchUi.pushView(new WatchUi.ProgressBar("Saving...", null), null, WatchUi.SLIDE_DOWN);
-        mTimer = new Timer.Timer();
-        mTimer.start(method(:onExit), 3000, false);
+    function SendCommand(command as StarlineCommand) {
+         mStarlineClient.SendCommand(method(:UpdateCarState), command);
     }
 
     function RefreshCarState() 
