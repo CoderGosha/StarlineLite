@@ -25,6 +25,8 @@ class StarlineClient
     function RefreshCarState(refresh_callback) {
         mRefreshCarState_callback = refresh_callback;
         var token = mAuthService.GetSlnet(method(:OnRefreshCarState));
+        var userId = mAuthService.GetUserId();
+
         if (token == null){
             // Ожидаем что сработает колл бэк на этот метод
             return;

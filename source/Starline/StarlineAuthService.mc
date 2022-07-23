@@ -48,8 +48,9 @@ class StarlineAuthService{
 
         mSlnet = GetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", 10 * 60 );
         mSlnetDate = Application.Properties.getValue("starline_API_mSlnetDate");
+        var userId = GetUserId();
 
-        if (mSlnet != null)
+        if ((mSlnet != null) && (userId != null))
         {
             return mSlnet;
         }
@@ -267,7 +268,8 @@ class StarlineAuthService{
     // Время 24 жизни - часа
     function GetSlnetToken() {
         mSlnet = GetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", 10 * 60 );
-        if (mSlnet != null)
+        mUserId = GetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", 10 * 60 );
+        if ((mSlnet != null) && (mUserId != null))
         {
             System.println("Use properties token");
             mAuth_callback.invoke();
@@ -306,7 +308,7 @@ class StarlineAuthService{
                 mSlnet = data.get("nchan_id");
                 mSlnetDate = GetDataToLong() + 24 * 60 * 60;
                 mUserId = data.get("user_id");
-                SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 1 * 60 * 60);
+                SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 30 * 24 * 60 * 60);
                 SetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", mSlnet, 24 * 60 * 60);
                 System.println("Response new slnet code: " + mSlnet);
                 mAuth_callback.invoke();
