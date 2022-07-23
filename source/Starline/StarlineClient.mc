@@ -92,6 +92,78 @@ class StarlineClient
 
     function SendCommand(command_callback, command) {
         mCommand_callback = command_callback;
+        if (mCarState.DeviceId == null)
+        {
+            return false;
+        }
 
+        OnSendCommand(command);
+    }
+
+    function GetCommandParams(command as StralineCommand) {
+        switch (command) {
+            case CommandLock:
+                return {                                             
+                        "type" => "arm_start",
+                        "arm_start" => 1
+                        };
+            case CommandUnlock:
+                return {                                             
+                        "type" => "arm_stop",
+                        "arm_stop" => 1
+                        };
+            default:
+                System.println("Unknown command");
+                return null;
+            }
+    }
+
+    function OnSendCommand(command) {
+        // У нас точно есть токен - поэтому выполянем 
+        var token = mAuthService.GetSlnet(method(:OnSendCommand));
+        var deviceId = mCarState.DeviceId;
+        token = "DE6AE702FBB72475DC446CAE0EB84109";
+        var slnet = "slnet="+ token;
+
+        //var url = "https://developer.starline.ru/json/v3/user/" + userId +"/data";
+        var url = "https://developer.starline.ru/json/v1/device/" + deviceId + "/set_param";
+        var options = {                                             // set the options
+            :method => Communications.HTTP_REQUEST_METHOD_POST,      // set HTTP method
+            :headers => {                                           // set headers
+             "Content-Type" => Communications.REQUEST_CONTENT_TYPE_JSON,
+             "Cookie"=>  slnet },
+            // set response type
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        };
+
+        var params = GetCommandParams(command);
+
+        var responseCallback = method(:onReceiveSendCommand);                  // set responseCallback to
+        // onReceive() method
+        // Make the Communications.makeWebRequest() call
+        //Communications.makeWebRequest(url, parameters, options, responseCallback)
+        Communications.makeWebRequest(url, params, options, method(:onReceiveSendCommand));
+    }
+
+    function onReceiveSendCommand(responseCode as Number, data as Dictionary?) as Void {
+
+        if (responseCode == 200) {
+            System.println("Request Successful"); 
+            var code = data.get("code");
+            if (code.toNumber() == 200){
+                mCarState.SetResultCommand(data);
+                mCommand_callback.invoke();
+                return;
+            }
+                            
+        } else {
+            mCarState.StatusCode = responseCode;
+            System.println("Response: " + responseCode + ":" + data);            // print response code
+            return;
+        }
+
+        mCarState.StatusCode = 500;
+        System.println("Error parse response" + data);            // print response code
+        mCommand_callback.invoke();
     }
 }

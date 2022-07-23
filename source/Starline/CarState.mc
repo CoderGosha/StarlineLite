@@ -21,6 +21,7 @@ public class CarState
         CarName = Application.Properties.getValue("starline_car_name");
         StatusCode = 0;
         TimeUpdate = 0;
+        DeviceId = Application.Properties.getValue("starline_car_device_id");
     }
 
     function GetUpdateTime() as String {
@@ -43,7 +44,7 @@ public class CarState
             CarName = property.get("alias");
             TempInside = property.get("ctemp");
             TempEngine = property.get("etemp");
-            Application.Properties.setValue("starline_car_name", CarName);
+            DeviceId = property.get("device_id");
 
             var car_state = property.get("car_state");
             if (car_state != null){
@@ -55,5 +56,21 @@ public class CarState
                     LockStatus = Unlock;
                 }
             }
+
+            Application.Properties.setValue("starline_car_name", CarName);
+            Application.Properties.setValue("starline_car_device_id", DeviceId);
+    }
+
+    function SetResultCommand(property as Dictionary) {
+            var car_arm = property.get("arm");
+            if (car_arm != null){
+                if (car_arm.toNumber() == 1){
+                    LockStatus = Lock;  
+                }
+                else {
+                    LockStatus = Unlock;
+                }
+            }
+        
     }
 }

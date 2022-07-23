@@ -33,6 +33,13 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         else if (labelId == :lock)
         {
             mController.SendCommand(CommandLock);
+            onBack();
+            return true;
+        }
+        else if (labelId == :unlock)
+        {
+            mController.SendCommand(CommandUnlock);
+            onBack();
             return true;
         }
         else if (labelId == :refresh)

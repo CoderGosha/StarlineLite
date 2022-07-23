@@ -7,7 +7,7 @@ using Toybox.System;
 
 public enum AppState {
     IDLE = "Idle",
-    SEND_COMMAND = "Send Command",
+    SEND_COMMAND = "Send_Command",
     UPDATING = "Updating",
     NULL_CREDENTIAL = "Null_Credential",
     ERROR_RESPONSE = "ERROR_RESPONSE"
@@ -35,7 +35,8 @@ class StarlineController
     }
 
     function SendCommand(command as StarlineCommand) {
-         mStarlineClient.SendCommand(method(:UpdateCarState), command);
+        AppState = SEND_COMMAND;
+        mStarlineClient.SendCommand(method(:UpdateCarState), command);
     }
 
     function RefreshCarState() 

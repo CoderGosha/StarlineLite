@@ -56,7 +56,12 @@ class StarlineLiteView extends WatchUi.View {
             mLabelTemp.setText("");
             mLabelUpdate.setText("Synchronization...");
         }
-
+        else if (mController.AppState == SEND_COMMAND)
+        {
+            // mLabelTitle.setText("Sync Starline");
+            // mLabelTemp.setText("");
+            mLabelUpdate.setText("Sending command...");
+        }
         else {
             mLabelCarName.setText(carState.CarName);
 
