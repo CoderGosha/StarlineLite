@@ -3,7 +3,9 @@ using Toybox.Time.Gregorian;
 public enum LockStatus{
     Undefined = "Undefined",
     Lock = "Lock",
-    Unlock = "Unlock"
+    Unlock = "Unlock",
+    RunAndUnlock = "RunAndUnlock",
+    RunAndLock = "RunAndLock"
 }
 
 public class CarState
@@ -15,6 +17,7 @@ public class CarState
     public var TempEngine as String;
     public var TempInside as String;
     public var TimeUpdate as Number; 
+    public var ErrorMessage as String; 
 
     function initialize() {
         LockStatus = Undefined;        
@@ -22,6 +25,7 @@ public class CarState
         StatusCode = 0;
         TimeUpdate = 0;
         DeviceId = Application.Properties.getValue("starline_car_device_id");
+        ErrorMessage = "";
     }
 
     function GetUpdateTime() as String {
@@ -49,28 +53,49 @@ public class CarState
             var car_state = property.get("car_state");
             if (car_state != null){
                 var car_arm = car_state.get("arm") as Boolean;
-                if (car_arm){
-                    LockStatus = Lock;  
-                }
-                else {
-                    LockStatus = Unlock;
-                }
+                var car_run = car_state.get("run") as Boolean;
+                SetLockState(car_arm, car_run);
             }
 
             Application.Properties.setValue("starline_car_name", CarName);
             Application.Properties.setValue("starline_car_device_id", DeviceId);
     }
 
-    function SetResultCommand(property as Dictionary) {
-            var car_arm = property.get("arm");
-            if (car_arm != null){
-                if (car_arm.toNumber() == 1){
+    function SetLockState(car_arm as Boolean, car_run as Boolean) {
+        if (car_arm && car_run){
+                    LockStatus = RunAndLock;  
+                }
+                else if (car_arm && !car_run){
                     LockStatus = Lock;  
                 }
-                else {
-                    LockStatus = Unlock;
+                else if (!car_arm && !car_run){
+                    LockStatus = Unlock;  
                 }
-            }
-        
+
+                else if (!car_arm && car_run){
+                    LockStatus = RunAndUnlock;  
+                }
+                else {
+                    LockStatus = Undefined;
+                }
+    }
+
+    function SetResultCommand(property as Dictionary) {
+        var car_arm = property.get("arm") as String;
+        var car_run = property.get("run") as String;
+        var car_arm_bool = false;
+        var car_run_bool = false;
+
+        if (car_arm.toNumber() == 1){
+            car_arm_bool = true;
+        }
+
+        if (car_run.toNumber() == 1){
+            car_run_bool = true;
+        }
+
+        SetLockState(car_arm_bool, car_run_bool);
+
+        TimeUpdate = Time.now();
     }
 }

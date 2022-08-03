@@ -48,6 +48,9 @@ class StarlineLiteView extends WatchUi.View {
             if (carState.StatusCode == 403){
                 mLabelUpdate.setText("Auth error");
             }
+            else{
+                mLabelUpdate.setText(carState.ErrorMessage);
+            }
             
         }
         else if (mController.AppState == UPDATING)

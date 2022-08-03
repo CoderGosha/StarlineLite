@@ -6,10 +6,10 @@ using Toybox.WatchUi;
 using Toybox.System;
 
 public enum AppState {
-    IDLE = "Idle",
-    SEND_COMMAND = "Send_Command",
-    UPDATING = "Updating",
-    NULL_CREDENTIAL = "Null_Credential",
+    IDLE = "IDLE",
+    SEND_COMMAND = "SEND_COMMAND",
+    UPDATING = "UPDATING",
+    NULL_CREDENTIAL = "NULL_CREDENTIAL",
     ERROR_RESPONSE = "ERROR_RESPONSE"
 }
 

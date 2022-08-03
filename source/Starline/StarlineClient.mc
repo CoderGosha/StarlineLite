@@ -38,7 +38,10 @@ class StarlineClient
         // У нас точно есть токен - поэтому выполянем 
         var token = mAuthService.GetSlnet(method(:OnRefreshCarState));
         var userId = mAuthService.GetUserId();
-        token = "DE6AE702FBB72475DC446CAE0EB84109";
+        //var mSlid = mAuthService.mSlid;
+
+       // mAuthService.TestSlid(mCarState.DeviceId);
+        token = "4113D15950DE96AE90F877C6AC8027DF";
         var slnet = "slnet="+ token;
 
         //var url = "https://developer.starline.ru/json/v3/user/" + userId +"/data";
@@ -47,7 +50,10 @@ class StarlineClient
             :method => Communications.HTTP_REQUEST_METHOD_GET,      // set HTTP method
             :headers => {                                           // set headers
              "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED,
-             "Cookie"=>  slnet },
+             "Cookie"=>  slnet
+             //"Digest" => mSlid,
+             //"DigestAuth"=>  "true" 
+              },
             // set response type
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
         };
@@ -74,10 +80,14 @@ class StarlineClient
                 mRefreshCarState_callback.invoke();
                 return;
             }
+            else{
+                mCarState.ErrorMessage = data.get("codestring");
+            }
                             
         } else {
             mCarState.StatusCode = responseCode;
             System.println("Response: " + responseCode + ":" + data);            // print response code
+            mRefreshCarState_callback.invoke();
             return;
         }
 
@@ -122,7 +132,7 @@ class StarlineClient
         // У нас точно есть токен - поэтому выполянем 
         var token = mAuthService.GetSlnet(method(:OnSendCommand));
         var deviceId = mCarState.DeviceId;
-        token = "DE6AE702FBB72475DC446CAE0EB84109";
+        token = "4113D15950DE96AE90F877C6AC8027DF";
         var slnet = "slnet="+ token;
 
         //var url = "https://developer.starline.ru/json/v3/user/" + userId +"/data";
@@ -155,10 +165,14 @@ class StarlineClient
                 mCommand_callback.invoke();
                 return;
             }
+            else{
+                mCarState.ErrorMessage = data.get("codestring");
+            }
                             
         } else {
             mCarState.StatusCode = responseCode;
             System.println("Response: " + responseCode + ":" + data);            // print response code
+            mCommand_callback.invoke();
             return;
         }
 

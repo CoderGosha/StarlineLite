@@ -7,21 +7,27 @@ class StarlineAuthService{
     var mAppId as String;
     var mAppSecret as String;
     var mIsAuth as Boolean;
-
+    var mIsDirectAuth as Boolean;
 
     var mCode as String;
     var mToken as String;
-    var mSlid as String;
+    public var mSlid as String;
     var mUserId as String;
     var mSlnet as String;
     var mSlnetDate as Number;
 
     var mAuth_callback;
 
+    var mProxyUrl as String;
+    var mProxyKey as String;
+
     function initialize() {
         mIsAuth = Application.Properties.getValue("starline_API_is_auth");
         mAppId = Application.Properties.getValue("starline_API_ID");
         mAppSecret = Application.Properties.getValue("starline_API_SECRET");
+        mIsDirectAuth = Application.Properties.getValue("starline_API_is_direct_auth");
+        mProxyUrl = Application.Properties.getValue("starline_API_proxy_url");
+        mProxyKey = Application.Properties.getValue("starline_API_proxy_key");
     }
 
     function RefreshCredentials(login as String, pass as String, url as String) {
@@ -267,6 +273,8 @@ class StarlineAuthService{
 
     // Время 24 жизни - часа
     function GetSlnetToken() {
+
+
         mSlnet = GetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", 10 * 60 );
         mUserId = GetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", 10 * 60 );
         if ((mSlnet != null) && (mUserId != null))
@@ -274,6 +282,17 @@ class StarlineAuthService{
             System.println("Use properties token");
             mAuth_callback.invoke();
         }
+
+        if (mIsDirectAuth){
+            GetSlnetTokenStarline();
+        }
+
+        else {
+            GetSlnetTokenWithProxy();
+        }
+    }
+
+    function GetSlnetTokenStarline() {
 
         // Получаем новый код
         System.println("Getting new slnet");
@@ -305,7 +324,7 @@ class StarlineAuthService{
             System.println("Request Successful"); 
             var code = data.get("code");
             if (code.toNumber() == 200){
-                mSlnet = data.get("nchan_id");
+                mSlnet = null; // data.get("nchan_id"); // Нужно брать из куков! 
                 mSlnetDate = GetDataToLong() + 24 * 60 * 60;
                 mUserId = data.get("user_id");
                 SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 30 * 24 * 60 * 60);
@@ -317,7 +336,95 @@ class StarlineAuthService{
 
                             
         } else {
-            mCarState.StatusCode = responseCode;
+           
+            System.println("Response: " + responseCode + ":" + data);            // print response code
+            return;
+        }
+
+        System.println("Error parse response" + data);            // print response code
+        
+    } 
+
+    function GetSlnetTokenWithProxy() {
+        // Получаем новый код
+        System.println("Getting new slnet with proxy");
+        
+        var params = {                                              // set the parameters
+            "slid_token" => mSlid
+        };
+
+        var url = mProxyUrl;
+
+        var options = {                                             // set the options
+            :method => Communications.HTTP_REQUEST_METHOD_GET,      // set HTTP method
+            :headers => {                                           // set headers
+             "Content-Type" => Communications.HTTP_RESPONSE_CONTENT_TYPE_URL_ENCODED},
+            // set response type
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        };
+
+        var responseCallback = method(:onReceiveGetSlnetWithProxy);                  // set responseCallback to
+        // onReceive() method
+        // Make the Communications.makeWebRequest() call
+        //Communications.makeWebRequest(url, parameters, options, responseCallback)
+        Communications.makeWebRequest(url, params, options, method(:onReceiveGetSlnetWithProxy));
+    }
+
+    function onReceiveGetSlnetWithProxy(responseCode as Number, data as Dictionary?) as Void {
+
+        if (responseCode == 200) {
+            System.println("Request Successful"); 
+            var code = data.get("code");
+            if (code.toNumber() == 200){
+                mSlnet = null; // data.get("nchan_id"); // Нужно брать из куков! 
+                mSlnetDate = GetDataToLong() + 24 * 60 * 60;
+                mUserId = data.get("user_id");
+                SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 30 * 24 * 60 * 60);
+                SetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", mSlnet, 24 * 60 * 60);
+                System.println("Response new slnet code: " + mSlnet);
+                mAuth_callback.invoke();
+                return;
+            }
+
+                            
+        } else {
+           
+            System.println("Response: " + responseCode + ":" + data);            // print response code
+            return;
+        }
+
+        System.println("Error parse response" + data);            // print response code
+        
+    } 
+
+    function TestSlid(deviceId) {
+
+        // Получаем новый код
+        System.println("Testing slid");
+        var token = "Digest " + mSlid + ":" + mUserId;
+        var url = "https://developer.starline.ru/json/v3/device/" + deviceId + "/data";
+
+        var options = {                                             // set the options
+            :method => Communications.HTTP_REQUEST_METHOD_GET,      // set HTTP method
+            :headers => {                                           // set headers
+             "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED,
+            // set response type
+            "Authorization" => token,
+            "DigestAuth"=>  true },
+            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        };
+
+        var responseCallback = method(:onReceiveTestSlid);                  // set responseCallback to
+
+        Communications.makeWebRequest(url, null, options, method(:onReceiveTestSlid));
+    }
+
+      function onReceiveTestSlid(responseCode as Number, data as Dictionary?) as Void {
+
+        if (responseCode == 200) {
+            System.println("Request Successful"); 
+                            
+        } else {
             System.println("Response: " + responseCode + ":" + data);            // print response code
             return;
         }
