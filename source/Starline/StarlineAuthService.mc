@@ -255,18 +255,15 @@ class StarlineAuthService{
                 if (slid != null){
                     System.println("Got new slid: " + slid); 
                     mSlid = slid;
-
                     return GetSlnetToken();
                 }
             }
                             
         } else {
-            mCarState.StatusCode = responseCode;
             System.println("Response: " + responseCode + ":" + data);            // print response code
             return;
         }
 
-        mCarState.StatusCode = 500;
         System.println("Error parse response" + data);            // print response code
         
     } 
@@ -283,13 +280,14 @@ class StarlineAuthService{
             mAuth_callback.invoke();
         }
 
-        if (mIsDirectAuth){
-            GetSlnetTokenStarline();
-        }
+        GetSlnetTokenStarline();    
+        // if (mIsDirectAuth){
+        //     GetSlnetTokenStarline();
+        // }
 
-        else {
-            GetSlnetTokenWithProxy();
-        }
+        // else {
+        //     GetSlnetTokenWithProxy();
+        // }
     }
 
     function GetSlnetTokenStarline() {

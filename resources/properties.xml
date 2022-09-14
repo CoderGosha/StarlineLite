@@ -14,7 +14,7 @@
 	<property id="starline_API_mUserId" type="string"></property>
 	<property id="starline_API_mSlnetDate" type="number">0</property>
 	<property id="starline_API_mSlnet" type="string"></property>
-	<property id="starline_API_is_direct_auth" type="boolean">false</property>
+	<property id="starline_API_is_direct_auth" type="boolean">true</property>
 	<property id="starline_API_proxy_url" type="string"></property>
 	<property id="starline_API_proxy_key" type="string"></property>
 </properties>
