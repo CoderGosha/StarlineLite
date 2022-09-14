@@ -280,14 +280,13 @@ class StarlineAuthService{
             mAuth_callback.invoke();
         }
 
-        GetSlnetTokenStarline();    
-        // if (mIsDirectAuth){
-        //     GetSlnetTokenStarline();
-        // }
+        if (mIsDirectAuth){
+            GetSlnetTokenStarline();
+        }
 
-        // else {
-        //     GetSlnetTokenWithProxy();
-        // }
+        else {
+            GetSlnetTokenWithProxy();
+        }
     }
 
     function GetSlnetTokenStarline() {
@@ -346,12 +345,12 @@ class StarlineAuthService{
     function GetSlnetTokenWithProxy() {
         // Получаем новый код
         System.println("Getting new slnet with proxy");
-        
+        //https://starlineauth.cg-bot.ru//auth.slid?slid_token=aa6ef6277ef77a3acc74c9f9de0d54a3:1458758
         var params = {                                              // set the parameters
             "slid_token" => mSlid
         };
 
-        var url = mProxyUrl;
+        var url = mProxyUrl + "auth.slid";
 
         var options = {                                             // set the options
             :method => Communications.HTTP_REQUEST_METHOD_GET,      // set HTTP method
@@ -369,20 +368,18 @@ class StarlineAuthService{
     }
 
     function onReceiveGetSlnetWithProxy(responseCode as Number, data as Dictionary?) as Void {
-
+        //
         if (responseCode == 200) {
             System.println("Request Successful"); 
-            var code = data.get("code");
-            if (code.toNumber() == 200){
-                mSlnet = null; // data.get("nchan_id"); // Нужно брать из куков! 
-                mSlnetDate = GetDataToLong() + 24 * 60 * 60;
-                mUserId = data.get("user_id");
-                SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 30 * 24 * 60 * 60);
-                SetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", mSlnet, 24 * 60 * 60);
-                System.println("Response new slnet code: " + mSlnet);
-                mAuth_callback.invoke();
-                return;
-            }
+
+            mSlnet = data.get("slnet_token"); // Нужно брать из куков! 
+            mSlnetDate = GetDataToLong() + 24 * 60 * 60;
+            mUserId = data.get("user_id");
+            SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 30 * 24 * 60 * 60);
+            SetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", mSlnet, 24 * 60 * 60);
+            System.println("Response new slnet code: " + mSlnet);
+            mAuth_callback.invoke();
+            return;
 
                             
         } else {

@@ -38,10 +38,6 @@ class StarlineClient
         // У нас точно есть токен - поэтому выполянем 
         var token = mAuthService.GetSlnet(method(:OnRefreshCarState));
         var userId = mAuthService.GetUserId();
-        //var mSlid = mAuthService.mSlid;
-
-       // mAuthService.TestSlid(mCarState.DeviceId);
-        token = "4113D15950DE96AE90F877C6AC8027DF";
         var slnet = "slnet="+ token;
 
         //var url = "https://developer.starline.ru/json/v3/user/" + userId +"/data";
@@ -51,8 +47,6 @@ class StarlineClient
             :headers => {                                           // set headers
              "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED,
              "Cookie"=>  slnet
-             //"Digest" => mSlid,
-             //"DigestAuth"=>  "true" 
               },
             // set response type
             :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
@@ -132,7 +126,6 @@ class StarlineClient
         // У нас точно есть токен - поэтому выполянем 
         var token = mAuthService.GetSlnet(method(:OnSendCommand));
         var deviceId = mCarState.DeviceId;
-        token = "4113D15950DE96AE90F877C6AC8027DF";
         var slnet = "slnet="+ token;
 
         //var url = "https://developer.starline.ru/json/v3/user/" + userId +"/data";
