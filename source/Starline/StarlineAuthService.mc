@@ -149,12 +149,11 @@ class StarlineAuthService{
             }
                             
         } else {
-            mCarState.StatusCode = responseCode;
+        
             System.println("Response: " + responseCode);            // print response code
             return;
         }
 
-        mCarState.StatusCode = 500;
         System.println("Error parse response");            // print response code
         
     } 
@@ -204,12 +203,10 @@ class StarlineAuthService{
             }
                             
         } else {
-            mCarState.StatusCode = responseCode;
             System.println("Response: " + responseCode);            // print response code
             return;
         }
 
-        mCarState.StatusCode = 500;
         System.println("Error parse response" + data);            // print response code
         
     } 

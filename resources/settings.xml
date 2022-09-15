@@ -5,4 +5,10 @@
 	<setting propertyKey="@Properties.starline_API_pass" title="@Strings.ServerPass">
 		<settingConfig type="alphaNumeric" required="true" />
 	</setting>
+	<setting propertyKey="@Properties.starline_API_ID" title="APP_ID">
+		<settingConfig type="alphaNumeric" required="true" />
+	</setting>
+	<setting propertyKey="@Properties.starline_API_SECRET" title="API_SECRET">
+		<settingConfig type="alphaNumeric" required="true" />
+	</setting>
 </settings>

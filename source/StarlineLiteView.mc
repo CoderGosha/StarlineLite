@@ -40,6 +40,12 @@ class StarlineLiteView extends WatchUi.View {
             mLabelTemp.setText("");
             mLabelUpdate.setText("");
         }
+        else if (mController.AppState == NULL_API_KEY_OR_ID)
+        {
+            mLabelTitle.setText("Check your API KEY OR ID");
+            mLabelTemp.setText("");
+            mLabelUpdate.setText("");
+        }
         else if (mController.AppState == ERROR_RESPONSE)
         {
             mLabelTitle.setText("Sync error");

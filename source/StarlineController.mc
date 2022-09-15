@@ -10,11 +10,15 @@ public enum AppState {
     SEND_COMMAND = "SEND_COMMAND",
     UPDATING = "UPDATING",
     NULL_CREDENTIAL = "NULL_CREDENTIAL",
-    ERROR_RESPONSE = "ERROR_RESPONSE"
+    ERROR_RESPONSE = "ERROR_RESPONSE",
+    NULL_API_KEY_OR_ID= "NULL_API_KEY_OR_ID",
 }
 
 class StarlineController
 {
+    var usesDefault = "User";
+    var passDefault = "Pass";
+
     public var AppState as AppState;
 
     var mTimer;
@@ -23,6 +27,8 @@ class StarlineController
     var mPass as String;
     var mUrl as String;
     var mStarlineClient as StarlineClient;
+    var mAppId as String;
+    var mAppSecret as String;
 
     // Initialize the controller
     function initialize() {
@@ -68,16 +74,24 @@ class StarlineController
         mLogin = Application.Properties.getValue("starline_API_user");
         mPass = Application.Properties.getValue("starline_API_pass");
         mUrl = Application.Properties.getValue("starline_API_URL");
-        
+        mAppId = Application.Properties.getValue("starline_API_ID");
+        mAppSecret = Application.Properties.getValue("starline_API_SECRET");
         mStarlineClient.RefreshCredentials(mLogin, mPass, mUrl);
     }
 
     function CheckAccess() as Boolean
     {
         UpdateCredentials();
-        if ((mLogin == Application.Properties.getValue("starline_API_user_default")) 
-        || (mPass == Application.Properties.getValue("starline_API_pass_default"))){
+        
+        if ((mLogin.hashCode() == usesDefault.hashCode()) 
+        || (mPass.hashCode() == passDefault.hashCode())){
             AppState = NULL_CREDENTIAL;
+            return false;
+        }
+
+        if ((mAppId.hashCode() == "".hashCode()) 
+        || (mAppSecret.hashCode() == "".hashCode())){
+            AppState = NULL_API_KEY_OR_ID;
             return false;
         }
 
