@@ -1,4 +1,5 @@
 using Toybox.Time.Gregorian;
+using Toybox.Position;
 
 public enum LockStatus{
     Undefined = "Undefined",
@@ -18,6 +19,9 @@ public class CarState
     public var TempInside as String;
     public var TimeUpdate as Number; 
     public var ErrorMessage as String; 
+    public var position_longitude = 0 as Float;
+    public var position_latitude = 0 as Float;
+    public var position_car;
 
     function initialize() {
         LockStatus = Undefined;        
@@ -57,6 +61,19 @@ public class CarState
                 SetLockState(car_arm, car_run);
             }
 
+            var position = property.get("position");
+            if (position != null){
+                position_longitude = position.get("x") as Float;
+                position_latitude = position.get("y") as Float;
+                position_car = new Position.Location(
+                    {
+                        :latitude => position_latitude,
+                        :longitude => position_longitude,
+                        :format => :degrees
+                    }
+                 );
+             }
+            
             Application.Properties.setValue("starline_car_name", CarName);
             Application.Properties.setValue("starline_car_device_id", DeviceId);
     }

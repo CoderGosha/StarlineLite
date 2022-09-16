@@ -79,6 +79,13 @@ class StarlineController
         mStarlineClient.RefreshCredentials(mLogin, mPass, mUrl);
     }
 
+    function GoToCar() {
+        var state = mStarlineClient.GetCarState();
+        var position_car = state.position_car;
+        WatchUi.pushView(new CarMapView(), new CarMapDelegate(), WatchUi.SLIDE_UP);
+        return true;
+    }
+
     function CheckAccess() as Boolean
     {
         UpdateCredentials();

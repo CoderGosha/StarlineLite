@@ -1,7 +1,1 @@
-bin/Export/Screenshot 2022-09-14 at 21.17.34.png
-bin/Export/Screenshot 2022-09-14 at 21.17.47.png
-bin/Export/StarlineLite.iq
-bin/.DS_Store
-bin/StarlineLite-settings.json
-bin/StarlineLite.prg
-bin/StarlineLite.prg.debug.xml
+bin/*

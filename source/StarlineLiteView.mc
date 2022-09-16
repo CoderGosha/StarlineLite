@@ -36,15 +36,15 @@ class StarlineLiteView extends WatchUi.View {
         var carState = mController.GetCarState();
         if (mController.AppState == NULL_CREDENTIAL)
         {
-            mLabelTitle.setText("Check your credentials");
+            mLabelTitle.setText("Check settings");
             mLabelTemp.setText("");
-            mLabelUpdate.setText("");
+            mLabelUpdate.setText("Invalid credentials");
         }
         else if (mController.AppState == NULL_API_KEY_OR_ID)
         {
-            mLabelTitle.setText("Check your API KEY OR ID");
+            mLabelTitle.setText("Check settings");
             mLabelTemp.setText("");
-            mLabelUpdate.setText("");
+            mLabelUpdate.setText("Invalid APP Id");
         }
         else if (mController.AppState == ERROR_RESPONSE)
         {

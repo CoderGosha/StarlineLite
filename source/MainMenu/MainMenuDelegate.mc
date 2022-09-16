@@ -42,6 +42,12 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             onBack();
             return true;
         }
+        else if (labelId == :gocar)
+        {
+            mController.GoToCar();
+            onBack();
+            return true;
+        }
         else if (labelId == :refresh)
         {
             mController.RefreshCarState();
