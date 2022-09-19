@@ -82,7 +82,6 @@ class StarlineController
     function GoToCar() {
         var state = mStarlineClient.GetCarState();
         var position_car = state.position_car;
-        WatchUi.pushView(new CarMapView(), new CarMapDelegate(), WatchUi.SLIDE_UP);
         return true;
     }
 
