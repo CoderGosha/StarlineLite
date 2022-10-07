@@ -21,6 +21,8 @@ class StarlineAuthService{
     var mProxyUrl as String;
     var mProxyKey as String;
 
+    public var AuthStatus as eAuthStatus;
+
     function initialize() {
         mIsAuth = Application.Properties.getValue("starline_API_is_auth");
         mAppId = Application.Properties.getValue("starline_API_ID");
@@ -28,6 +30,7 @@ class StarlineAuthService{
         mIsDirectAuth = Application.Properties.getValue("starline_API_is_direct_auth");
         mProxyUrl = Application.Properties.getValue("starline_API_proxy_url");
         mProxyKey = Application.Properties.getValue("starline_API_proxy_key");
+        AuthStatus = AuthUndefined;
     }
 
     function RefreshCredentials(login as String, pass as String, url as String) {
@@ -151,10 +154,10 @@ class StarlineAuthService{
         } else {
         
             System.println("Response: " + responseCode);            // print response code
-            return;
         }
 
         System.println("Error parse response");            // print response code
+         FinalAuth(InvalidAPPIdORAPPSecret); 
         
     } 
 
@@ -204,11 +207,10 @@ class StarlineAuthService{
                             
         } else {
             System.println("Response: " + responseCode);            // print response code
-            return;
         }
 
         System.println("Error parse response" + data);            // print response code
-        
+        FinalAuth(InvalidAPPIdORAPPSecret);  
     } 
 
     // Время жизни - часа
@@ -258,16 +260,19 @@ class StarlineAuthService{
                             
         } else {
             System.println("Response: " + responseCode + ":" + data);            // print response code
-            return;
         }
 
         System.println("Error parse response" + data);            // print response code
-        
+        FinalAuth(InvalidLoginOrPass);
     } 
+
+    function FinalAuth(status) {
+        AuthStatus = status;
+        mAuth_callback.invoke();
+    }
 
     // Время 24 жизни - часа
     function GetSlnetToken() {
-
 
         mSlnet = GetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", 10 * 60 );
         mUserId = GetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", 10 * 60 );
@@ -376,40 +381,19 @@ class StarlineAuthService{
             SetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", mSlnet, 24 * 60 * 60);
             System.println("Response new slnet code: " + mSlnet);
             mAuth_callback.invoke();
+
+            AuthStatus = Ready;
             return;
 
                             
         } else {
            
             System.println("Response: " + responseCode + ":" + data);            // print response code
-            return;
         }
 
         System.println("Error parse response" + data);            // print response code
-        
+        FinalAuth(ErrorProxy);
     } 
-
-    function TestSlid(deviceId) {
-
-        // Получаем новый код
-        System.println("Testing slid");
-        var token = "Digest " + mSlid + ":" + mUserId;
-        var url = "https://developer.starline.ru/json/v3/device/" + deviceId + "/data";
-
-        var options = {                                             // set the options
-            :method => Communications.HTTP_REQUEST_METHOD_GET,      // set HTTP method
-            :headers => {                                           // set headers
-             "Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED,
-            // set response type
-            "Authorization" => token,
-            "DigestAuth"=>  true },
-            :responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
-        };
-
-        var responseCallback = method(:onReceiveTestSlid);                  // set responseCallback to
-
-        Communications.makeWebRequest(url, null, options, method(:onReceiveTestSlid));
-    }
 
       function onReceiveTestSlid(responseCode as Number, data as Dictionary?) as Void {
 

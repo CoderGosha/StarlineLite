@@ -44,8 +44,16 @@ class StarlineLiteView extends WatchUi.View {
         {
             mLabelTitle.setText("Check settings");
             mLabelTemp.setText("");
-            mLabelUpdate.setText("Invalid APP Id");
+            mLabelUpdate.setText("Invalid APP Id or APP KEY");
         }
+
+        else if (mController.AppState == ERROR_PROXY_RESPONSE)
+        {
+            mLabelTitle.setText("Sync error");
+            mLabelTemp.setText("");
+            mLabelUpdate.setText("Proxy error");      
+        }
+
         else if (mController.AppState == ERROR_RESPONSE)
         {
             mLabelTitle.setText("Sync error");

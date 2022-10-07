@@ -1,5 +1,5 @@
 <strings>
-    <string id="AppName">StarlineLite</string>
+    <string id="AppName">StarlineLiteBeta</string>
     <string id="Lock">Lock</string>
     <string id="Loading">Loading...</string>
     <string id="Unlock">Unlock</string>
@@ -9,4 +9,6 @@
     <string id="ServerPass">Password</string>
     <string id="Update">Synchronization...</string>
     <string id="LayoutLock">Lock/Unlock</string>
+    <string id="APP_ID">APP_ID</string>
+    <string id="API_SECRET">API_SECRET</string>
 </strings>

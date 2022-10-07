@@ -12,13 +12,11 @@ public enum AppState {
     NULL_CREDENTIAL = "NULL_CREDENTIAL",
     ERROR_RESPONSE = "ERROR_RESPONSE",
     NULL_API_KEY_OR_ID= "NULL_API_KEY_OR_ID",
+    ERROR_PROXY_RESPONSE = "ERROR_PROXY_RESPONSE",
 }
 
 class StarlineController
 {
-    var usesDefault = "User";
-    var passDefault = "Pass";
-
     public var AppState as AppState;
 
     var mTimer;
@@ -55,12 +53,28 @@ class StarlineController
     }
 
     function UpdateCarState() {
-        var state = mStarlineClient.GetCarState();
-        if (state.StatusCode != 200){
-            AppState = ERROR_RESPONSE;
+        var authStatus = mStarlineClient.GetAuthState();
+        if (authStatus != Ready){
+            if (authStatus == InvalidLoginOrPass){
+                 AppState = NULL_CREDENTIAL;
+            }
+
+            if (authStatus == InvalidAPPIdORAPPSecret){
+                 AppState = NULL_API_KEY_OR_ID;
+            }
+
+           if (authStatus == ErrorProxy){
+                 AppState = ERROR_PROXY_RESPONSE;
+            }
         }
         else {
-            AppState = IDLE;
+            var state = mStarlineClient.GetCarState();
+            if (state.StatusCode != 200){
+                AppState = ERROR_RESPONSE;
+            }
+            else {
+                AppState = IDLE;
+            }
         }
 
         WatchUi.requestUpdate(); 
@@ -89,8 +103,8 @@ class StarlineController
     {
         UpdateCredentials();
         
-        if ((mLogin.hashCode() == usesDefault.hashCode()) 
-        || (mPass.hashCode() == passDefault.hashCode())){
+        if ((mLogin.hashCode() == "".hashCode()) 
+        || (mPass.hashCode() == "".hashCode())){
             AppState = NULL_CREDENTIAL;
             return false;
         }

@@ -1,6 +1,6 @@
 <properties>
-	<property id="starline_API_user" type="string">User</property>
-	<property id="starline_API_pass" type="string">Pass</property>
+	<property id="starline_API_user" type="string"></property>
+	<property id="starline_API_pass" type="string"></property>
 	<property id="starline_API_ID" type="string"></property>
 	<property id="starline_API_SECRET" type="string"></property>
 	<property id="starline_API_URL" type="string">https://id.starline.ru/</property>

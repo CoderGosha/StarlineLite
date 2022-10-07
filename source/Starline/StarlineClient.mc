@@ -22,6 +22,10 @@ class StarlineClient
         return mCarState;
     }
 
+    function GetAuthState() as eAuthStatus {
+        return mAuthService.AuthStatus;
+    }
+
     function RefreshCarState(refresh_callback) {
         mRefreshCarState_callback = refresh_callback;
         var token = mAuthService.GetSlnet(method(:OnRefreshCarState));
@@ -35,6 +39,11 @@ class StarlineClient
     }
 
     function OnRefreshCarState() {
+        if (mAuthService.AuthStatus != Ready)
+            {
+                FinalUpdate();
+                return;
+            }
         // У нас точно есть токен - поэтому выполянем 
         var token = mAuthService.GetSlnet(method(:OnRefreshCarState));
         var userId = mAuthService.GetUserId();
@@ -102,6 +111,10 @@ class StarlineClient
         }
 
         OnSendCommand(command);
+    }
+
+    function FinalUpdate() {
+        mRefreshCarState_callback.invoke();
     }
 
     function GetCommandParams(command as StralineCommand) {
@@ -173,4 +186,5 @@ class StarlineClient
         System.println("Error parse response" + data);            // print response code
         mCommand_callback.invoke();
     }
+
 }
