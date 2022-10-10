@@ -61,18 +61,18 @@ public class CarState
                 SetLockState(car_arm, car_run);
             }
 
-            var position = property.get("position");
-            if (position != null){
-                position_longitude = position.get("x") as Float;
-                position_latitude = position.get("y") as Float;
-                position_car = new Position.Location(
-                    {
-                        :latitude => position_latitude,
-                        :longitude => position_longitude,
-                        :format => :degrees
-                    }
-                 );
-             }
+           // var position = property.get("position");
+            // if (position != null){
+            //     position_longitude = position.get("x") as Float;
+            //     position_latitude = position.get("y") as Float;
+            //     position_car = new Position.Location(
+            //         {
+            //             :latitude => position_latitude,
+            //             :longitude => position_longitude,
+            //             :format => :degrees
+            //         }
+            //      );
+            //  }
             
             Application.Properties.setValue("starline_car_name", CarName);
             Application.Properties.setValue("starline_car_device_id", DeviceId);

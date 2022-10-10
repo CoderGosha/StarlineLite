@@ -30,6 +30,11 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             WatchUi.pushView(new Rez.Layouts.MenuAbout(), new MenuAboutDelegat(), WatchUi.SLIDE_UP);
             return true;
         }
+        else if (labelId == :debug)
+        {
+            WatchUi.pushView(new Rez.Layouts.MenuDebug(), new MenuDebugDelegat(), WatchUi.SLIDE_UP);
+            return true;
+        }
         else if (labelId == :lock)
         {
             mController.SendCommand(CommandLock);

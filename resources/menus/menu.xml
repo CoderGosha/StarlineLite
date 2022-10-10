@@ -3,5 +3,6 @@
   <menu-item id="unlock" label="@Strings.Unlock"></menu-item>
    <!-- <menu-item id="gocar" label="Go to Car"></menu-item> -->
   <menu-item id="about" label="@Strings.About"></menu-item>
+   <menu-item id="debug" label="Debug"></menu-item>
   <menu-item id="refresh" label="Refresh"></menu-item>
 </menu2>

@@ -51,6 +51,7 @@ class StarlineAuthService{
 
         if ((mSlnetDate != 0) && (mSlnet != null) && (current_time < (mSlnetDate - 10 * 60)))
         {
+            AuthStatus = Ready;
             System.println("Use properties token");
             return mSlnet; 
         }
@@ -61,6 +62,7 @@ class StarlineAuthService{
 
         if ((mSlnet != null) && (userId != null))
         {
+            AuthStatus = Ready;
             return mSlnet;
         }
 
@@ -94,11 +96,17 @@ class StarlineAuthService{
 	}
 
     function GetMD5(text) as String{
-        var hasher = new Cryptography.Hash({:algorithm => Cryptography.HASH_MD5});
-        hasher.update(string_to_byte(text));
-        var hash_byte = hasher.digest();
+        try {
+            var hasher = new Cryptography.Hash({:algorithm => Cryptography.HASH_MD5});
+            hasher.update(string_to_byte(text));
+            var hash_byte = hasher.digest();
 
-        return byte_to_hexstring(hash_byte);
+            return byte_to_hexstring(hash_byte);
+        }
+        catch( ex ) {
+             FinalAuth(AuthUndefined);  
+        }
+  
     }
 
     function GetSHA1(text) as String{
@@ -143,11 +151,14 @@ class StarlineAuthService{
             var states = data.get("state");
             if (states == 1)
             {    
-                var app_code = data.get("desc").get("code");
-                if (app_code != null){
-                    System.println("Got new app code: " + app_code); 
-                    mCode = app_code;
-                    return GetToken(); 
+                var desc = data.get("desc");
+                if (desc != null) {
+                    var app_code = desc.get("code");
+                    if (app_code != null){
+                        System.println("Got new app code: " + app_code); 
+                        mCode = app_code;
+                        return GetToken(); 
+                    }
                 }
             }
                             
@@ -155,9 +166,9 @@ class StarlineAuthService{
         
             System.println("Response: " + responseCode);            // print response code
         }
-
+       
         System.println("Error parse response");            // print response code
-         FinalAuth(InvalidAPPIdORAPPSecret); 
+        FinalAuth(InvalidAPPIdORAPPSecret); 
         
     } 
 
@@ -197,11 +208,14 @@ class StarlineAuthService{
             var states = data.get("state");
             if (states == 1)
             {    
-                var token = data.get("desc").get("token");
-                if (token != null){
-                    System.println("Got new token: " + token); 
-                    mToken = token;
-                    return GetSlId(); 
+                var desc = data.get("desc");
+                if (desc != null) {
+                var token = desc.get("token");
+                    if (token != null){
+                        System.println("Got new token: " + token); 
+                        mToken = token;
+                        return GetSlId(); 
+                    }
                 }
             }
                             
@@ -250,11 +264,14 @@ class StarlineAuthService{
             var states = data.get("state");
             if (states == 1)
             {    
-                var slid = data.get("desc").get("user_token");
-                if (slid != null){
-                    System.println("Got new slid: " + slid); 
-                    mSlid = slid;
-                    return GetSlnetToken();
+                var desc = data.get("desc");
+                if (desc != null) {
+                var slid = desc.get("user_token");
+                    if (slid != null){
+                        System.println("Got new slid: " + slid); 
+                        mSlid = slid;
+                        return GetSlnetToken();
+                    }
                 }
             }
                             
@@ -279,7 +296,7 @@ class StarlineAuthService{
         if ((mSlnet != null) && (mUserId != null))
         {
             System.println("Use properties token");
-            mAuth_callback.invoke();
+            FinalAuth(Ready);
         }
 
         if (mIsDirectAuth){
@@ -379,10 +396,8 @@ class StarlineAuthService{
             mUserId = data.get("user_id");
             SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 30 * 24 * 60 * 60);
             SetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", mSlnet, 24 * 60 * 60);
-            System.println("Response new slnet code: " + mSlnet);
-            mAuth_callback.invoke();
-
-            AuthStatus = Ready;
+            System.println("Response new slnet code: " + mSlnet);  
+            FinalAuth(Ready);         
             return;
 
                             
@@ -431,7 +446,7 @@ class StarlineAuthService{
         var mPropery = Application.Properties.getValue(name_property);
         var current_time = GetDataToLong();
         if (mProperyDate == 0)
-            {return null;}
+           {return null;}
 
         if (current_time < (mProperyDate - sec))
         {

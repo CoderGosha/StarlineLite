@@ -27,6 +27,7 @@ class StarlineController
     var mStarlineClient as StarlineClient;
     var mAppId as String;
     var mAppSecret as String;
+     var mLastError as String;
 
     // Initialize the controller
     function initialize() {
@@ -36,6 +37,9 @@ class StarlineController
         mCarState = new CarState();
         mStarlineClient = new StarlineClient();
         //mAppState = AppState.IDLE;
+        Application.Properties.setValue("initialization", true);
+        mLastError = "Empty error";
+
     }
 
     function SendCommand(command as StarlineCommand) {
@@ -45,11 +49,23 @@ class StarlineController
 
     function RefreshCarState() 
     {
-        if (((AppState == IDLE) || (AppState == ERROR_RESPONSE)) && (CheckAccess()))
-        {
-            AppState = UPDATING;
-            mStarlineClient.RefreshCarState(method(:UpdateCarState));
+        try {
+            mLastError.toNumber();
+            if (((AppState == IDLE) || (AppState == ERROR_RESPONSE)) && (CheckAccess()))
+            {
+                AppState = UPDATING;
+                mStarlineClient.RefreshCarState(method(:UpdateCarState));
+            }
         }
+        catch( ex ) {
+            AppState = ERROR_RESPONSE;
+            mLastError = ex.getErrorMessage();
+            WatchUi.requestUpdate(); 
+        }
+    }
+
+    function GetError() {
+        return mLastError;
     }
 
     function UpdateCarState() {

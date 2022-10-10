@@ -63,7 +63,7 @@ class StarlineLiteView extends WatchUi.View {
                 mLabelUpdate.setText("Auth error");
             }
             else{
-                mLabelUpdate.setText(carState.ErrorMessage);
+                mLabelUpdate.setText("Check Start->Debug");
             }
             
         }
