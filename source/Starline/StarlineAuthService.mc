@@ -442,17 +442,17 @@ class StarlineAuthService{
 
 
     function GetCacheProperty(name_property, date_property, sec as Number) {
-        var mProperyDate = Application.Properties.getValue(date_property);
+        var mProperyDate = Application.Properties.getValue(date_property) as Number;
         var mPropery = Application.Properties.getValue(name_property);
         var current_time = GetDataToLong();
         if (mProperyDate == 0)
-           {return null;}
+            {return null;}
 
         if (current_time < (mProperyDate - sec))
-        {
-            System.println("Use properties cache" + name_property + ":" + mPropery);
-            return mPropery;
-        }
+         {
+             //System.println("Use properties cache" + name_property + ":" + mPropery);
+             return mPropery;
+         }
 
         return null;
     }
@@ -460,6 +460,6 @@ class StarlineAuthService{
     function SetCacheProperty(name_property, date_property, value, sec as Number) {
         var current_time = GetDataToLong() + sec;
         Application.Properties.setValue(name_property, value);
-        Application.Properties.setValue(date_property, current_time);
+        Application.Properties.setValue(date_property as Number, current_time);
     }
 }
