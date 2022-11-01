@@ -25,7 +25,9 @@ class StarlineClient
     function GetAuthState() as eAuthStatus {
         return mAuthService.AuthStatus;
     }
-
+    function GetAuthError() as String {
+        return mAuthService.GetAuthError();
+    }
     function RefreshCarState(refresh_callback) {
         mRefreshCarState_callback = refresh_callback;
         var token = mAuthService.GetSlnet(method(:OnRefreshCarState));
@@ -114,6 +116,7 @@ class StarlineClient
     }
 
     function FinalUpdate() {
+
         mRefreshCarState_callback.invoke();
     }
 

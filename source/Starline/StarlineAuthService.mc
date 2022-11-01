@@ -20,6 +20,7 @@ class StarlineAuthService{
 
     var mProxyUrl as String;
     var mProxyKey as String;
+    var mLastError as String;
 
     public var AuthStatus as eAuthStatus;
 
@@ -31,6 +32,7 @@ class StarlineAuthService{
         mProxyUrl = Application.Properties.getValue("starline_API_proxy_url");
         mProxyKey = Application.Properties.getValue("starline_API_proxy_key");
         AuthStatus = AuthUndefined;
+        mLastError = "Empty";
     }
 
     function RefreshCredentials(login as String, pass as String, url as String) {
@@ -161,9 +163,12 @@ class StarlineAuthService{
                     }
                 }
             }
+            else {
+                mLastError = "InvalidAPPIdORAPPSecret: " + data.get("desc").get("message");
+            }
                             
         } else {
-        
+            mLastError = "InvalidAPPIdORAPPSecret. Response: " + responseCode;
             System.println("Response: " + responseCode);            // print response code
         }
        
@@ -218,8 +223,12 @@ class StarlineAuthService{
                     }
                 }
             }
+            else {
+                mLastError = "InvalidAPPIdORAPPSecret: " + data.get("desc").get("message");
+            }
                             
         } else {
+            mLastError = "InvalidAPPIdORAPPSecret. Response: " + responseCode + ":" + data;
             System.println("Response: " + responseCode);            // print response code
         }
 
@@ -274,8 +283,12 @@ class StarlineAuthService{
                     }
                 }
             }
+            else {
+                mLastError = "InvalidLoginOrPass: " + data.get("desc").get("message");
+            }
                             
         } else {
+            mLastError = "InvalidLoginOrPass. Response: " + responseCode + ":" + data;
             System.println("Response: " + responseCode + ":" + data);            // print response code
         }
 
@@ -402,8 +415,8 @@ class StarlineAuthService{
 
                             
         } else {
-           
-            System.println("Response: " + responseCode + ":" + data);            // print response code
+           mLastError = "ErrorProxy. Response: " + responseCode + ":" + data;
+            System.println("ErrorProxy. Response: " + responseCode + ":" + data);            // print response code
         }
 
         System.println("Error parse response" + data);            // print response code
@@ -461,5 +474,9 @@ class StarlineAuthService{
         var current_time = GetDataToLong() + sec;
         Application.Properties.setValue(name_property as String, value);
         Application.Properties.setValue(date_property as Number, current_time);
+    }
+
+    function GetAuthError() {
+        return mLastError;
     }
 }

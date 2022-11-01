@@ -70,17 +70,22 @@ class StarlineController
 
     function UpdateCarState() {
         var authStatus = mStarlineClient.GetAuthState();
+        var authError = mStarlineClient.GetAuthError();
+
         if (authStatus != Ready){
             if (authStatus == InvalidLoginOrPass){
                  AppState = NULL_CREDENTIAL;
+                 mLastError = authError;
             }
 
             if (authStatus == InvalidAPPIdORAPPSecret){
                  AppState = NULL_API_KEY_OR_ID;
+                 mLastError = authError;
             }
 
            if (authStatus == ErrorProxy){
                  AppState = ERROR_PROXY_RESPONSE;
+                 mLastError = authError;
             }
         }
         else {
@@ -122,12 +127,14 @@ class StarlineController
         if ((mLogin.hashCode() == "".hashCode()) 
         || (mPass.hashCode() == "".hashCode())){
             AppState = NULL_CREDENTIAL;
+            mLastError = "Empty settings";
             return false;
         }
 
         if ((mAppId.hashCode() == "".hashCode()) 
         || (mAppSecret.hashCode() == "".hashCode())){
             AppState = NULL_API_KEY_OR_ID;
+            mLastError = "Empty settings";
             return false;
         }
 
