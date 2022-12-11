@@ -21,6 +21,7 @@ class StarlineAuthService{
     var mProxyUrl as String;
     var mProxyKey as String;
     var mLastError as String;
+    var mUseCache as Boolean;
 
     public var AuthStatus as eAuthStatus;
 
@@ -33,6 +34,7 @@ class StarlineAuthService{
         mProxyKey = Application.Properties.getValue("starline_API_proxy_key");
         AuthStatus = AuthUndefined;
         mLastError = "Empty";
+        mUseCache = Application.Properties.getValue("USE_CACHE");
     }
 
     function RefreshCredentials(login as String, pass as String, url as String) {
@@ -54,7 +56,6 @@ class StarlineAuthService{
         if ((mSlnetDate != 0) && (mSlnet != null) && (current_time < (mSlnetDate - 10 * 60)))
         {
             AuthStatus = Ready;
-            System.println("Use properties token");
             return mSlnet; 
         }
 
@@ -455,22 +456,38 @@ class StarlineAuthService{
 
 
     function GetCacheProperty(name_property, date_property, sec as Number) {
-        var mProperyDate = Application.Properties.getValue(date_property) as Number;
-        var mPropery = Application.Properties.getValue(name_property) as String;
-        var current_time = GetDataToLong();
-        if (mProperyDate == 0)
-            {return null;}
+        if (!mUseCache)
+        {
+            WebLoggerModule.webLogger.Log(LogDebug, "Skip properties cache " + name_property + ":" + date_property); 
+            return null;
+        }
+        try {
+            var mProperyDate = Application.Properties.getValue(date_property) as Number;
+            var mPropery = Application.Properties.getValue(name_property) as String;
+            var current_time = GetDataToLong();
+            if (mProperyDate == 0)
+                {return null;}
 
-        if (current_time < (mProperyDate - sec))
-         {
-             //System.println("Use properties cache" + name_property + ":" + mPropery);
-             return mPropery;
-         }
+            if (current_time < (mProperyDate - sec))
+            {
+                WebLoggerModule.webLogger.Log(LogDebug, "Use properties cache: " + name_property + ":" + mPropery);
+                return mPropery;
+            }
+        }
+        catch( ex ) {
+            System.println("Error read properties: " + name_property);
+            return null;
+        }
 
         return null;
     }
 
     function SetCacheProperty(name_property, date_property, value, sec as Number) {
+        if (!mUseCache)
+        {
+            return;
+        }
+
         var current_time = GetDataToLong() + sec;
         Application.Properties.setValue(name_property as String, value);
         Application.Properties.setValue(date_property as Number, current_time);

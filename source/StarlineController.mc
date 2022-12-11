@@ -39,7 +39,8 @@ class StarlineController
         //mAppState = AppState.IDLE;
         Application.Properties.setValue("initialization", true);
         mLastError = "Empty error";
-
+        WebLoggerModule.webLogger = new WebLoggerModule.WebLogger();
+        WebLoggerModule.webLogger.Log(LogDebug, "Starting App");
     }
 
     function SendCommand(command as StarlineCommand) {
@@ -65,6 +66,7 @@ class StarlineController
     }
 
     function GetError() {
+        
         return mLastError;
     }
 
