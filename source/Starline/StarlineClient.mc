@@ -74,7 +74,7 @@ class StarlineClient
     function onReceiveGetUserData(responseCode as Number, data as Dictionary?) as Void {
 
         if (responseCode == 200) {
-            System.println("Request Successful"); 
+            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
             var code = data.get("code");
             if (code.toNumber() == 200){
                 var device = data.get("devices");
@@ -91,13 +91,13 @@ class StarlineClient
                             
         } else {
             mCarState.StatusCode = responseCode;
-            System.println("Response: " + responseCode + ":" + data);            // print response code
+            WebLoggerModule.webLogger.Log(LogDebug,"Response: " + responseCode + ":" + data);            // print response code
             mRefreshCarState_callback.invoke();
             return;
         }
 
         mCarState.StatusCode = 500;
-        System.println("Error parse response" + data);            // print response code
+        WebLoggerModule.webLogger.Log(LogDebug,"Error parse response" + data);            // print response code
         mRefreshCarState_callback.invoke();
     } 
 
@@ -133,7 +133,7 @@ class StarlineClient
                         "arm_stop" => 1
                         };
             default:
-                System.println("Unknown command");
+                WebLoggerModule.webLogger.Log(LogDebug,"Unknown command");
                 return null;
             }
     }
@@ -167,7 +167,7 @@ class StarlineClient
     function onReceiveSendCommand(responseCode as Number, data as Dictionary?) as Void {
 
         if (responseCode == 200) {
-            System.println("Request Successful"); 
+            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
             var code = data.get("code");
             if (code.toNumber() == 200){
                 mCarState.SetResultCommand(data);
@@ -180,13 +180,13 @@ class StarlineClient
                             
         } else {
             mCarState.StatusCode = responseCode;
-            System.println("Response: " + responseCode + ":" + data);            // print response code
+            WebLoggerModule.webLogger.Log(LogDebug,"Response: " + responseCode + ":" + data);            // print response code
             mCommand_callback.invoke();
             return;
         }
 
         mCarState.StatusCode = 500;
-        System.println("Error parse response" + data);            // print response code
+        WebLoggerModule.webLogger.Log(LogDebug,"Error parse response" + data);            // print response code
         mCommand_callback.invoke();
     }
 

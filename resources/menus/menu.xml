@@ -5,4 +5,5 @@
   <menu-item id="about" label="@Strings.About"></menu-item>
    <menu-item id="debug" label="Debug"></menu-item>
   <menu-item id="refresh" label="Refresh"></menu-item>
+  <menu-item id="sync_logs" label="Sync Log"></menu-item>
 </menu2>

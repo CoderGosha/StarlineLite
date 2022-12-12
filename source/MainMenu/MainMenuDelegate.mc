@@ -22,7 +22,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function onSelect(item) {
-        System.println(item.getId());
+        WebLoggerModule.webLogger.Log(LogDebug,item.getId());
         var labelId = item.getId();
 
         if (labelId == :about)
@@ -61,6 +61,13 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             //     null
             // );
             //WatchUi.pushView(progressBar, new MenuProgressDelegate(), WatchUi.SLIDE_DOWN);
+            onBack();
+            return true;
+        }
+
+        else if (labelId == :sync_logs)
+        {
+            mController.SyncLog();
             onBack();
             return true;
         }

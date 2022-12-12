@@ -19,7 +19,6 @@ class StarlineAuthService{
     var mAuth_callback;
 
     var mProxyUrl as String;
-    var mProxyKey as String;
     var mLastError as String;
     var mUseCache as Boolean;
 
@@ -31,7 +30,6 @@ class StarlineAuthService{
         mAppSecret = Application.Properties.getValue("starline_API_SECRET");
         mIsDirectAuth = Application.Properties.getValue("starline_API_is_direct_auth");
         mProxyUrl = Application.Properties.getValue("starline_API_proxy_url");
-        mProxyKey = Application.Properties.getValue("starline_API_proxy_key");
         AuthStatus = AuthUndefined;
         mLastError = "Empty";
         mUseCache = Application.Properties.getValue("USE_CACHE");
@@ -122,7 +120,7 @@ class StarlineAuthService{
     // Время жизни 1 час
     function GetCode() {
         // Получаем новый код
-        System.println("Getting new code");
+        WebLoggerModule.webLogger.Log(LogDebug,"Getting new code");
         
         var secret = GetMD5(mAppSecret);
         var params = {                                              // set the parameters
@@ -150,7 +148,7 @@ class StarlineAuthService{
      function onReceiveGetCode(responseCode as Number, data as Dictionary?) as Void {
 
         if (responseCode == 200) {
-            System.println("Request Successful"); 
+            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
             var states = data.get("state");
             if (states == 1)
             {    
@@ -158,7 +156,7 @@ class StarlineAuthService{
                 if (desc != null) {
                     var app_code = desc.get("code");
                     if (app_code != null){
-                        System.println("Got new app code: " + app_code); 
+                        WebLoggerModule.webLogger.Log(LogDebug,"Got new app code: " + app_code); 
                         mCode = app_code;
                         return GetToken(); 
                     }
@@ -170,10 +168,10 @@ class StarlineAuthService{
                             
         } else {
             mLastError = "InvalidAPPIdORAPPSecret. Response: " + responseCode;
-            System.println("Response: " + responseCode);            // print response code
+            WebLoggerModule.webLogger.Log(LogDebug,"Response: " + responseCode);            // print response code
         }
        
-        System.println("Error parse response");            // print response code
+        WebLoggerModule.webLogger.Log(LogDebug,"Error parse response");            // print response code
         FinalAuth(InvalidAPPIdORAPPSecret); 
         
     } 
@@ -182,7 +180,7 @@ class StarlineAuthService{
     function GetToken() {
 
         // Получаем новый код
-        System.println("Getting new token");
+        WebLoggerModule.webLogger.Log(LogDebug,"Getting new token");
         
         var secret = GetMD5(mAppSecret + mCode);
         var params = {                                              // set the parameters
@@ -210,7 +208,7 @@ class StarlineAuthService{
     function onReceiveGetToken(responseCode as Number, data as Dictionary?) as Void {
 
         if (responseCode == 200) {
-            System.println("Request Successful"); 
+            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
             var states = data.get("state");
             if (states == 1)
             {    
@@ -218,7 +216,7 @@ class StarlineAuthService{
                 if (desc != null) {
                 var token = desc.get("token");
                     if (token != null){
-                        System.println("Got new token: " + token); 
+                        WebLoggerModule.webLogger.Log(LogDebug,"Got new token: " + token); 
                         mToken = token;
                         return GetSlId(); 
                     }
@@ -230,10 +228,10 @@ class StarlineAuthService{
                             
         } else {
             mLastError = "InvalidAPPIdORAPPSecret. Response: " + responseCode + ":" + data;
-            System.println("Response: " + responseCode);            // print response code
+            WebLoggerModule.webLogger.Log(LogDebug,"Response: " + responseCode);            // print response code
         }
 
-        System.println("Error parse response" + data);            // print response code
+        WebLoggerModule.webLogger.Log(LogDebug,"Error parse response" + data);            // print response code
         FinalAuth(InvalidAPPIdORAPPSecret);  
     } 
 
@@ -241,7 +239,7 @@ class StarlineAuthService{
     function GetSlId() {
 
         // Получаем новый код
-        System.println("Getting new slid");
+        WebLoggerModule.webLogger.Log(LogDebug,"Getting new slid");
         
         var secret = GetSHA1(mPass);
         var params = {                                              // set the parameters
@@ -270,7 +268,7 @@ class StarlineAuthService{
     function onReceiveGetSlId(responseCode as Number, data as Dictionary?) as Void {
 
         if (responseCode == 200) {
-            System.println("Request Successful"); 
+            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
             var states = data.get("state");
             if (states == 1)
             {    
@@ -278,7 +276,7 @@ class StarlineAuthService{
                 if (desc != null) {
                 var slid = desc.get("user_token");
                     if (slid != null){
-                        System.println("Got new slid: " + slid); 
+                        WebLoggerModule.webLogger.Log(LogDebug,"Got new slid: " + slid); 
                         mSlid = slid;
                         return GetSlnetToken();
                     }
@@ -290,10 +288,10 @@ class StarlineAuthService{
                             
         } else {
             mLastError = "InvalidLoginOrPass. Response: " + responseCode + ":" + data;
-            System.println("Response: " + responseCode + ":" + data);            // print response code
+            WebLoggerModule.webLogger.Log(LogDebug,"Response: " + responseCode + ":" + data);            // print response code
         }
 
-        System.println("Error parse response" + data);            // print response code
+        WebLoggerModule.webLogger.Log(LogDebug,"Error parse response" + data);            // print response code
         FinalAuth(InvalidLoginOrPass);
     } 
 
@@ -309,7 +307,7 @@ class StarlineAuthService{
         mUserId = GetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", 10 * 60 );
         if ((mSlnet != null) && (mUserId != null))
         {
-            System.println("Use properties token");
+            WebLoggerModule.webLogger.Log(LogDebug,"Use properties token");
             FinalAuth(Ready);
         }
 
@@ -325,7 +323,7 @@ class StarlineAuthService{
     function GetSlnetTokenStarline() {
 
         // Получаем новый код
-        System.println("Getting new slnet");
+        WebLoggerModule.webLogger.Log(LogDebug,"Getting new slnet");
         
         var params = {                                              // set the parameters
             "slid_token" => mSlid
@@ -351,7 +349,7 @@ class StarlineAuthService{
     function onReceiveGetSlnet(responseCode as Number, data as Dictionary?) as Void {
 
         if (responseCode == 200) {
-            System.println("Request Successful"); 
+            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
             var code = data.get("code");
             if (code.toNumber() == 200){
                 mSlnet = null; // data.get("nchan_id"); // Нужно брать из куков! 
@@ -359,7 +357,7 @@ class StarlineAuthService{
                 mUserId = data.get("user_id");
                 SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 30 * 24 * 60 * 60);
                 SetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", mSlnet, 24 * 60 * 60);
-                System.println("Response new slnet code: " + mSlnet);
+                WebLoggerModule.webLogger.Log(LogDebug,"Response new slnet code: " + mSlnet);
                 mAuth_callback.invoke();
                 return;
             }
@@ -367,17 +365,17 @@ class StarlineAuthService{
                             
         } else {
            
-            System.println("Response: " + responseCode + ":" + data);            // print response code
+            WebLoggerModule.webLogger.Log(LogDebug,"Response: " + responseCode + ":" + data);            // print response code
             return;
         }
 
-        System.println("Error parse response" + data);            // print response code
+        WebLoggerModule.webLogger.Log(LogDebug,"Error parse response" + data);            // print response code
         
     } 
 
     function GetSlnetTokenWithProxy() {
         // Получаем новый код
-        System.println("Getting new slnet with proxy");
+        WebLoggerModule.webLogger.Log(LogDebug,"Getting new slnet with proxy");
         //https://starlineauth.cg-bot.ru//auth.slid?slid_token=aa6ef6277ef77a3acc74c9f9de0d54a3:1458758
         var params = {                                              // set the parameters
             "slid_token" => mSlid
@@ -403,39 +401,39 @@ class StarlineAuthService{
     function onReceiveGetSlnetWithProxy(responseCode as Number, data as Dictionary?) as Void {
         //
         if (responseCode == 200) {
-            System.println("Request Successful"); 
+            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
 
             mSlnet = data.get("slnet_token"); // Нужно брать из куков! 
             mSlnetDate = GetDataToLong() + 24 * 60 * 60;
             mUserId = data.get("user_id");
             SetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", mUserId, 30 * 24 * 60 * 60);
             SetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", mSlnet, 24 * 60 * 60);
-            System.println("Response new slnet code: " + mSlnet);  
+            WebLoggerModule.webLogger.Log(LogDebug,"Response new slnet code: " + mSlnet);  
             FinalAuth(Ready);         
             return;
 
                             
         } else {
            mLastError = "ErrorProxy. Response: " + responseCode + ":" + data;
-            System.println("ErrorProxy. Response: " + responseCode + ":" + data);            // print response code
+            WebLoggerModule.webLogger.Log(LogDebug,"ErrorProxy. Response: " + responseCode + ":" + data);            // print response code
         }
 
-        System.println("Error parse response" + data);            // print response code
+        WebLoggerModule.webLogger.Log(LogDebug,"Error parse response" + data);            // print response code
         FinalAuth(ErrorProxy);
     } 
 
       function onReceiveTestSlid(responseCode as Number, data as Dictionary?) as Void {
 
         if (responseCode == 200) {
-            System.println("Request Successful"); 
+            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
                             
         } else {
-            System.println("Response: " + responseCode + ":" + data);            // print response code
+            WebLoggerModule.webLogger.Log(LogDebug,"Response: " + responseCode + ":" + data);            // print response code
             return;
         }
 
         mCarState.StatusCode = 500;
-        System.println("Error parse response" + data);            // print response code
+        WebLoggerModule.webLogger.Log(LogDebug,"Error parse response" + data);            // print response code
         
     } 
 
@@ -475,7 +473,7 @@ class StarlineAuthService{
             }
         }
         catch( ex ) {
-            System.println("Error read properties: " + name_property);
+            WebLoggerModule.webLogger.Log(LogDebug,"Error read properties: " + name_property);
             return null;
         }
 

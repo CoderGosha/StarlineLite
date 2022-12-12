@@ -122,6 +122,12 @@ class StarlineController
         return true;
     }
 
+    function SyncLog() {
+        WebLoggerModule.webLogger.Log(LogInfo, "Start SyncLogs");
+        WebLoggerModule.webLogger.SyncLogs();
+        return true;
+    }
+
     function CheckAccess() as Boolean
     {
         UpdateCredentials();
