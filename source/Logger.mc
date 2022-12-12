@@ -50,6 +50,10 @@ class LogArray{
         mLogList[mLogIndex] = log;
         mLogIndex = mLogIndex + 1;
     }
+
+    function GetJson(){
+        return "[]";
+    }
 }
 
 
@@ -83,7 +87,7 @@ module WebLoggerModule
             var params = {                                              // set the parameters
                 "app_name" => "StarlineLite",
                 "request_id" => 1,
-                "logs" => "Test"
+                "logs" => mLogList.GetJson()
             };
 
             var url = mProxyUrl + "/sync.logs";
@@ -102,17 +106,8 @@ module WebLoggerModule
         }
 
         function onReceiveSyncLogs(responseCode as Number, data as Dictionary?) as Void {
-            if (responseCode == 200) {
-                WebLoggerModule.webLogger.Log(LogDebug, "Request Successful"); 
-                                
-            } 
-            else {
-            
-                WebLoggerModule.webLogger.Log(LogDebug, "Response: " + responseCode + ":" + data);            // print response code
-                return;
-            }
 
-            WebLoggerModule.webLogger.Log(LogDebug, "Error parse response" + data);            // print response code
+            WebLoggerModule.webLogger.Log(LogDebug, "Response" + data);            // print response code
             
         } 
     }
