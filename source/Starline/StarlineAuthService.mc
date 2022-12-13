@@ -303,8 +303,11 @@ class StarlineAuthService{
     // Время 24 жизни - часа
     function GetSlnetToken() {
 
-        mSlnet = GetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", 10 * 60 );
-        mUserId = GetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", 10 * 60 );
+        if ((mSlnet == null) || (mUserId == null)) 
+        {
+            mSlnet = GetCacheProperty("starline_API_mSlnet", "starline_API_mSlnetDate", 10 * 60 );
+            mUserId = GetCacheProperty("starline_API_mUserId", "starline_API_mUserIdDate", 10 * 60 );
+        }
         if ((mSlnet != null) && (mUserId != null))
         {
             WebLoggerModule.webLogger.Log(LogDebug,"Use properties token");
@@ -381,7 +384,7 @@ class StarlineAuthService{
             "slid_token" => mSlid
         };
 
-        var url = mProxyUrl + "auth.slid";
+        var url = mProxyUrl + "/auth.slid";
 
         var options = {                                             // set the options
             :method => Communications.HTTP_REQUEST_METHOD_GET,      // set HTTP method
