@@ -52,7 +52,25 @@ class LogArray{
     }
 
     function GetJson(){
-        return "[]";
+        var json =  "[";
+        for (var i=0; i<mSize; i++){
+            if (mLogList[i] != null){
+                if (i != 0){
+                    json += ",";
+                }
+                var record = mLogList[i];
+                var msg = "{";
+                msg +=  "\"level\"" + ":\"" + record.mLevel + "\",";
+                msg +=  "\"dateTime\"" + ":\"" + record.mDateTime + "\",";
+                msg +=  "\"message\"" + ":\"" + record.mMessage + "\"";
+
+                msg += "}";
+                json += msg;
+            }
+        }
+        json +="]";
+       // var dict = {"test" => [{"test"=>"value1"}, {}]}
+        return StringUtil.encodeBase64(json);
     }
 }
 
@@ -82,11 +100,9 @@ module WebLoggerModule
         }
 
         function SyncLogs() {
-            WebLoggerModule.webLogger.Log(LogDebug, "Syncing logs");
-        
             var params = {                                              // set the parameters
                 "app_name" => "StarlineLite",
-                "request_id" => 1,
+                "request_id" => Time.now().value(),
                 "logs" => mLogList.GetJson()
             };
 
