@@ -92,6 +92,12 @@ class StarlineLiteView extends WatchUi.View {
             } else if (carState.LockStatus == Unlock){
                 mLabelTitle.setText("Unlock");
             }
+            else if (carState.LockStatus == RunAndUnlock){
+                mLabelTitle.setText("Run & Unlock");
+            }
+            else if (carState.LockStatus == RunAndLock){
+                mLabelTitle.setText("Run & Lock");
+            }
             else{
                 mLabelTitle.setText("Undefined");
             }

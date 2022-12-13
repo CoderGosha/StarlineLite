@@ -314,13 +314,8 @@ class StarlineAuthService{
             FinalAuth(Ready);
         }
 
-        if (mIsDirectAuth){
-            GetSlnetTokenStarline();
-        }
-
-        else {
-            GetSlnetTokenWithProxy();
-        }
+        // Тут когда то можно сделать выбор авторизации
+        GetSlnetTokenWithProxy();
     }
 
     function GetSlnetTokenStarline() {

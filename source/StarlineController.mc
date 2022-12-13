@@ -28,6 +28,8 @@ class StarlineController
     var mAppId as String;
     var mAppSecret as String;
      var mLastError as String;
+     var backgroundUpdateProcess as Boolean;
+     var backgroundUpdateProcessTimer as Timer.Timer;
 
     // Initialize the controller
     function initialize() {
@@ -41,6 +43,9 @@ class StarlineController
         mLastError = "Empty error";
         WebLoggerModule.webLogger = new WebLoggerModule.WebLogger();
         WebLoggerModule.webLogger.Log(LogDebug, "Starting App");
+        backgroundUpdateProcess = false;
+        backgroundUpdateProcessTimer = new Timer.Timer();
+        backgroundUpdateProcessTimer.start(method(:UpdateCarStateBackground), 30000, true);
     }
 
     function SendCommand(command as StarlineCommand) {
@@ -101,6 +106,36 @@ class StarlineController
         }
 
         WatchUi.requestUpdate(); 
+    }
+
+    function UpdateCarStateBackground() 
+    {
+        if (backgroundUpdateProcess){
+            return;
+        }
+
+        try {
+            backgroundUpdateProcess = true;
+            if (((AppState == IDLE) || (AppState == ERROR_RESPONSE)) && (CheckAccess()))
+            {
+                mStarlineClient.RefreshCarState(method(:UpdateCarStateBackgroundCallBack));
+            }
+        }
+        catch( ex ) {
+            WebLoggerModule.webLogger.Log(LogError, "Error background update: " + ex.getErrorMessage());
+            WatchUi.requestUpdate(); 
+        }
+        finally
+        {
+            backgroundUpdateProcess = false;
+        }
+    }
+
+    function UpdateCarStateBackgroundCallBack() {
+        var state = mStarlineClient.GetCarState();
+         if (state.StatusCode == 200){
+            WatchUi.requestUpdate(); 
+         }
     }
 
     function GetCarState() as CarState {

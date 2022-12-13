@@ -79,22 +79,23 @@ public class CarState
     }
 
     function SetLockState(car_arm as Boolean, car_run as Boolean) {
-        if (car_arm && car_run){
-                    LockStatus = RunAndLock;  
-                }
-                else if (car_arm && !car_run){
-                    LockStatus = Lock;  
-                }
-                else if (!car_arm && !car_run){
-                    LockStatus = Unlock;  
-                }
+        if (car_arm && car_run)
+        {
+            LockStatus = RunAndLock;  
+        }
+        else if (car_arm && !car_run){
+            LockStatus = Lock;  
+        }
+        else if (!car_arm && !car_run){
+            LockStatus = Unlock;  
+        }
 
-                else if (!car_arm && car_run){
-                    LockStatus = RunAndUnlock;  
-                }
-                else {
-                    LockStatus = Undefined;
-                }
+        else if (!car_arm && car_run){
+            LockStatus = RunAndUnlock;  
+        }
+        else {
+            LockStatus = Undefined;
+        }
     }
 
     function SetResultCommand(property as Dictionary) {
