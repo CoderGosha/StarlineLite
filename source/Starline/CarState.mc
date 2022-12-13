@@ -6,7 +6,8 @@ public enum LockStatus{
     Lock = "Lock",
     Unlock = "Unlock",
     RunAndUnlock = "RunAndUnlock",
-    RunAndLock = "RunAndLock"
+    RunAndLock = "RunAndLock",
+    RemoteRun = "RemoteRun"
 }
 
 public class CarState
@@ -33,7 +34,7 @@ public class CarState
     }
 
     function GetUpdateTime() as String {
-        var today = Gregorian.info(TimeUpdate, Time.FORMAT_MEDIUM);
+        var today = Gregorian.info(TimeUpdate, Time.FORMAT_LONG);
         var dateString = Lang.format(
             "$1$:$2$",
             [
@@ -58,7 +59,8 @@ public class CarState
             if (car_state != null){
                 var car_arm = car_state.get("arm") as Boolean;
                 var car_run = car_state.get("run") as Boolean;
-                SetLockState(car_arm, car_run);
+                var car_r_start = car_state.get("r_start") as Boolean;
+                SetLockState(car_arm, car_run, car_r_start);
             }
 
            // var position = property.get("position");
@@ -78,8 +80,11 @@ public class CarState
             Application.Properties.setValue("starline_car_device_id", DeviceId);
     }
 
-    function SetLockState(car_arm as Boolean, car_run as Boolean) {
-        if (car_arm && car_run)
+    function SetLockState(car_arm as Boolean, car_run as Boolean, car_r_start as Boolean) {
+        if (car_r_start){
+            LockStatus = RemoteRun;
+        }
+        else if (car_arm && car_run)
         {
             LockStatus = RunAndLock;  
         }
@@ -112,7 +117,7 @@ public class CarState
             car_run_bool = true;
         }
 
-        SetLockState(car_arm_bool, car_run_bool);
+        SetLockState(car_arm_bool, car_run_bool, false);
 
         TimeUpdate = Time.now();
     }
