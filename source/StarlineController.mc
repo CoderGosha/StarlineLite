@@ -136,6 +136,7 @@ class StarlineController
         || (mPass.hashCode() == "".hashCode())){
             AppState = NULL_CREDENTIAL;
             mLastError = "Empty settings";
+            WebLoggerModule.webLogger.Log(LogError, "NULL_CREDENTIAL");
             return false;
         }
 
@@ -143,6 +144,7 @@ class StarlineController
         || (mAppSecret.hashCode() == "".hashCode())){
             AppState = NULL_API_KEY_OR_ID;
             mLastError = "Empty settings";
+            WebLoggerModule.webLogger.Log(LogError, "NULL_API_KEY_OR_ID");
             return false;
         }
 

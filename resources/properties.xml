@@ -13,7 +13,7 @@
 	<property id="starline_API_mSlnetDate" type="number">0</property>
 	<property id="starline_API_mSlnet" type="string"></property>
 	<property id="starline_API_is_direct_auth" type="boolean">false</property>
-	<property id="starline_API_proxy_url" type="string">http://localhost:5005</property>
+	<property id="starline_API_proxy_url" type="string">https://starlineauth.cg-bot.ru</property>
 	<property id="starline_API_proxy_user" type="string">starline</property>
 	<property id="starline_API_proxy_pass" type="string">erdfghjkljhgfdxcvbnjkliuytrdf</property>
 	<property id="initialization" type="boolean">false</property>
