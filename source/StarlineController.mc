@@ -35,6 +35,9 @@ class StarlineController
     // Initialize the controller
     function initialize() {
         // Allocate a timer
+        WebLoggerModule.webLogger = new WebLoggerModule.WebLogger();
+        WebLoggerModule.webLogger.Log(LogDebug, "Starting App");
+        CacheModule.FakeInit(Application.Properties.getValue("USE_CACHE"), Application);
         mTimer = null;
         AppState = IDLE;
         mCarState = new CarState();
@@ -42,8 +45,6 @@ class StarlineController
         //mAppState = AppState.IDLE;
         Application.Properties.setValue("initialization", true);
         mLastError = "Empty error";
-        WebLoggerModule.webLogger = new WebLoggerModule.WebLogger();
-        WebLoggerModule.webLogger.Log(LogDebug, "Starting App");
         backgroundUpdateProcess = false;
         backgroundUpdateProcessTimer = new Timer.Timer();
         backgroundUpdateProcessTimer.start(method(:UpdateCarStateBackground), 15000, true);

@@ -26,10 +26,10 @@ public class CarState
 
     function initialize() {
         LockStatus = Undefined;        
-        CarName = Application.Properties.getValue("starline_car_name");
+        CarName = CacheModule.GetCacheProperty("starline_car_name");
         StatusCode = 0;
         TimeUpdate = 0;
-        DeviceId = Application.Properties.getValue("starline_car_device_id");
+        DeviceId = CacheModule.GetCacheProperty("starline_car_device_id");
         ErrorMessage = "";
     }
 
@@ -82,8 +82,8 @@ public class CarState
             //      );
             //  }
             
-            Application.Properties.setValue("starline_car_name", CarName);
-            Application.Properties.setValue("starline_car_device_id", DeviceId);
+            CacheModule.SetCacheProperty("starline_car_name", CarName);
+            CacheModule.SetCacheProperty("starline_car_device_id", DeviceId);
     }
 
     function SetLockState(car_arm as Boolean, car_run as Boolean, car_r_start as Boolean) {
