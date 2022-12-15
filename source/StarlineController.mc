@@ -111,6 +111,13 @@ class StarlineController
             if (state.StatusCode != 200){
                 AppState = ERROR_RESPONSE;
             }
+            //else if (state.StatusCode == -2){
+            //    // костыль для автозапуска
+            //    AppState = IDLE;
+            //    WatchUi.requestUpdate(); 
+            //    mStarlineClient.RefreshCarState(method(:UpdateCarState));
+            //    return;
+           // }
             else {
                 AppState = IDLE;
             }

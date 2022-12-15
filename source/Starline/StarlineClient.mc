@@ -191,13 +191,16 @@ class StarlineClient
             }
                             
         } 
-        else if (responseCode == -2) {
+        else if ((responseCode == -2) || (responseCode == -400)) {
             // Костыль для автозапуска
-            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful with -2"); 
-            mCarState.StatusCode = 200;
-            mCommand_callback.invoke();
+            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful with " + responseCode);
+            // mRefreshCarState_callback = mCommand_callback;
+            // OnRefreshCarState(); 
+            WebLoggerModule.webLogger.Log(LogDebug, "Starting manual update states"); 
+            RefreshCarState(mCommand_callback);
+            //mCarState.StatusCode = -2;
+            //mCommand_callback.invoke();
             return;
-                
         }
         else {
             mCarState.StatusCode = responseCode;
