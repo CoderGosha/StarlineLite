@@ -1,6 +1,8 @@
 <menu2 id="MainMenu" title="@Strings.AppName">
   <menu-item id="lock" label="@Strings.Lock"></menu-item>
   <menu-item id="unlock" label="@Strings.Unlock"></menu-item>
+  <menu-item id="remote_start" label="@Strings.RemoteStart"></menu-item>
+  <menu-item id="stop" label="@Strings.Stop"></menu-item>
    <!-- <menu-item id="gocar" label="Go to Car"></menu-item> -->
   <menu-item id="about" label="@Strings.About"></menu-item>
    <menu-item id="debug" label="Debug"></menu-item>

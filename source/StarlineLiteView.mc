@@ -40,6 +40,12 @@ class StarlineLiteView extends WatchUi.View {
             mLabelTemp.setText("");
             mLabelUpdate.setText("Invalid credentials");
         }
+        else if (mController.AppState == NETWORK_ERROR)
+        {
+            mLabelTitle.setText("Network error");
+            mLabelTemp.setText("");
+            mLabelUpdate.setText("");
+        }
         else if (mController.AppState == NULL_API_KEY_OR_ID)
         {
             mLabelTitle.setText("Check settings");

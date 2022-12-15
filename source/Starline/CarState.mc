@@ -34,14 +34,20 @@ public class CarState
     }
 
     function GetUpdateTime() as String {
+        if (TimeUpdate == 0)
+        {
+            return "-";
+        }
         var today = Gregorian.info(TimeUpdate, Time.FORMAT_LONG);
-        var dateString = Lang.format(
-            "$1$:$2$",
-            [
-                today.hour,
-                today.min
-            ]
-        );
+        var dateString = today.hour;
+        if (today.min < 10)
+        {
+            dateString += ":0" + today.min;
+        }
+        else
+        {
+            dateString += ":" + today.min;
+        }
 
         return dateString;
     }

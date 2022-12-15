@@ -3,7 +3,9 @@ using Toybox.Cryptography;
 
 public enum StralineCommand{
     CommandLock = "CommanLock",
-    CommandUnlock = "CommandUnlock"
+    CommandUnlock = "CommandUnlock",
+    CommandRemoteStart = "CommandRemoteStart",
+    CommandStop = "CommandStop"
 }
 
 class StarlineClient
@@ -131,6 +133,16 @@ class StarlineClient
                 return {                                             
                         "type" => "arm_stop",
                         "arm_stop" => 1
+                        };
+            case CommandRemoteStart:
+                return {                                             
+                        "type" => "ign_start",
+                        "ign_start" => 1
+                        };
+            case CommandStop:
+                return {                                             
+                        "type" => "ign_stop",
+                        "ign_stop" => 1
                         };
             default:
                 WebLoggerModule.webLogger.Log(LogDebug,"Unknown command");

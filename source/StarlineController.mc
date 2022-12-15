@@ -13,6 +13,7 @@ public enum AppState {
     ERROR_RESPONSE = "ERROR_RESPONSE",
     NULL_API_KEY_OR_ID= "NULL_API_KEY_OR_ID",
     ERROR_PROXY_RESPONSE = "ERROR_PROXY_RESPONSE",
+    NETWORK_ERROR = "NETWORK_ERROR",
 }
 
 class StarlineController
@@ -45,7 +46,16 @@ class StarlineController
         WebLoggerModule.webLogger.Log(LogDebug, "Starting App");
         backgroundUpdateProcess = false;
         backgroundUpdateProcessTimer = new Timer.Timer();
-        backgroundUpdateProcessTimer.start(method(:UpdateCarStateBackground), 30000, true);
+        backgroundUpdateProcessTimer.start(method(:UpdateCarStateBackground), 15000, true);
+        CheckNetWork();
+    }
+
+    function CheckNetWork() {
+        var isConnected = System.getDeviceSettings().connectionAvailable;
+        if (!isConnected){
+            AppState = NETWORK_ERROR;
+        }
+        
     }
 
     function SendCommand(command as StarlineCommand) {

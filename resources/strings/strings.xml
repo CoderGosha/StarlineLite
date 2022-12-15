@@ -3,6 +3,8 @@
     <string id="Lock">Lock</string>
     <string id="Loading">Loading...</string>
     <string id="Unlock">Unlock</string>
+    <string id="RemoteStart">Remote Run</string>
+    <string id="Stop">Stop</string>
     <string id="About">About</string>
     <string id="Settings">Settings</string>
     <string id="ServerUser">Username</string>

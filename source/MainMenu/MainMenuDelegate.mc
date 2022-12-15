@@ -47,6 +47,18 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             onBack();
             return true;
         }
+        else if (labelId == :remote_start)
+        {
+            mController.SendCommand(CommandRemoteStart);
+            onBack();
+            return true;
+        }
+        else if (labelId == :stop)
+        {
+            mController.SendCommand(CommandStop);
+            onBack();
+            return true;
+        }
         else if (labelId == :gocar)
         {
             mController.GoToCar();
