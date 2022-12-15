@@ -190,7 +190,16 @@ class StarlineClient
                 mCarState.ErrorMessage = data.get("codestring");
             }
                             
-        } else {
+        } 
+        else if (responseCode == -2) {
+            // Костыль для автозапуска
+            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful with -2"); 
+            mCarState.StatusCode = 200;
+            mCommand_callback.invoke();
+            return;
+                
+        }
+        else {
             mCarState.StatusCode = responseCode;
             WebLoggerModule.webLogger.Log(LogDebug,"Response: " + responseCode + ":" + data);            // print response code
             mCommand_callback.invoke();
