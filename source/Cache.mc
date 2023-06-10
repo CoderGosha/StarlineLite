@@ -1,8 +1,9 @@
+using Toybox.Lang;
 
 module CacheModule{
     var mUseCache = false;
     var mApplication;
-    function FakeInit(useCache as Boolean, Application) {
+    function FakeInit(useCache as Lang.Boolean, Application) {
         mUseCache = useCache;
         mApplication = Application;
 
@@ -14,7 +15,7 @@ module CacheModule{
             return null;
         }
         try {
-            var mPropery = mApplication.Properties.getValue(name_property) as String;
+            var mPropery = mApplication.Properties.getValue(name_property) as Lang.String;
             WebLoggerModule.webLogger.Log(LogDebug, "Use properties cache: " + name_property + ":" + mPropery);
             return mPropery;
         }
@@ -22,19 +23,17 @@ module CacheModule{
             WebLoggerModule.webLogger.Log(LogDebug,"Error read properties: " + name_property);
             return null;
         }
-
-        return null;
     }
 
-     function GetCachePropertyWithTime(name_property, date_property, sec as Number) {
+     function GetCachePropertyWithTime(name_property, date_property, sec as Lang.Number) {
         if (!mUseCache)
         {
             WebLoggerModule.webLogger.Log(LogDebug, "Skip properties cache " + name_property + ":" + date_property); 
             return null;
         }
         try {
-            var mProperyDate = mApplication.Properties.getValue(date_property) as Number;
-            var mPropery = mApplication.Properties.getValue(name_property) as String;
+            var mProperyDate = mApplication.Properties.getValue(date_property) as Lang.Number;
+            var mPropery = mApplication.Properties.getValue(name_property) as Lang.String;
             var current_time = GetDataToLong();
             if (mProperyDate == 0)
                 {return null;}
@@ -53,15 +52,15 @@ module CacheModule{
         return null;
     }
 
-    function SetCachePropertyWithTime(name_property, date_property, value, sec as Number) {
+    function SetCachePropertyWithTime(name_property, date_property, value, sec as Lang.Number) {
         if (!mUseCache)
         {
             return;
         }
 
         var current_time = GetDataToLong() + sec;
-        mApplication.Properties.setValue(name_property as String, value);
-        mApplication.Properties.setValue(date_property as Number, current_time);
+        mApplication.Properties.setValue(name_property as Lang.String, value);
+        mApplication.Properties.setValue(date_property as Lang.Number, current_time);
     }
 
     function SetCacheProperty(name_property, value) {
@@ -70,10 +69,6 @@ module CacheModule{
             return;
         }
         WebLoggerModule.webLogger.Log(LogDebug, "Set cache:" + name_property + " value: " + value);
-        mApplication.Properties.setValue(name_property as String, value);
-    }
-
-    function GetAuthError() {
-        return mLastError;
+        mApplication.Properties.setValue(name_property as Lang.String, value);
     }
 }

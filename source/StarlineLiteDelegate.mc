@@ -10,12 +10,12 @@ class StarlineLiteDelegate extends WatchUi.BehaviorDelegate {
         mController = Application.getApp().controller;
     }
 
-    // function onMenu() as Boolean {
+    // function onMenu() as Lang.Boolean {
     //     WatchUi.pushView(new Rez.Menus.MainMenu(), new MainMenuDelegate(), WatchUi.SLIDE_UP);
     //     return true;
     // }
 
-    function onSelect() as Boolean{
+    function onSelect() as Lang.Boolean{
         WatchUi.pushView(new Rez.Menus.MainMenu(), new MainMenuDelegate(), WatchUi.SLIDE_UP);
         return true;
     }

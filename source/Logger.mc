@@ -1,4 +1,6 @@
 using Toybox.Time.Gregorian;
+using Toybox.Lang;
+using Toybox.Communications;
 
 public enum eWebLoggerLevel
 {
@@ -11,10 +13,10 @@ public enum eWebLoggerLevel
 class LogRecord
 {
     var mLevel as eWebLoggerLevel;
-    var mMessage as String;
-    var mDateTime as String;
+    var mMessage as Lang.String;
+    var mDateTime as Lang.String;
 
-    function initialize(level as eWebLoggerLevel, message as String) {
+    function initialize(level as eWebLoggerLevel, message as Lang.String) {
         var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
         mLevel = level;
         mMessage = message;
@@ -34,7 +36,7 @@ class LogRecord
 
 class LogArray{
     var mLogList;
-    var mLogIndex as Intager;
+    var mLogIndex = 0;
     var mSize = 100;
 
     function initialize(){
@@ -78,9 +80,9 @@ class LogArray{
 module WebLoggerModule
 {
     class WebLogger{ 
-        var mProxyUrl as String;
-        var mProxyUser as String;
-        var mProxyPass as String;
+        var mProxyUrl as Lang.String;
+        var mProxyUser as Lang.String;
+        var mProxyPass as Lang.String;
         var mLogList as LogArray;
 
         function initialize() {
@@ -90,7 +92,7 @@ module WebLoggerModule
             mLogList = new LogArray();
         }
 
-        function Log(level as eWebLoggerLevel, message as String)
+        function Log(level as eWebLoggerLevel, message as Lang.String)
         {
             var log = level + ": " + message;
             System.println(log);
@@ -99,7 +101,11 @@ module WebLoggerModule
             mLogList.AddLogMemory(record);
         }
 
-        function SyncLogs() {
+        function onReceiveSyncLogs(responseCode as Lang.Number, data as Null or Lang.Dictionary or Lang.String) as Void{
+            WebLoggerModule.webLogger.Log(LogDebug, "Response" + data);            // print response code
+        } 
+
+        function SyncLogs() as Void{
             var params = {                                              // set the parameters
                 "app_name" => "StarlineLite",
                 "request_id" => Time.now().value(),
@@ -120,12 +126,6 @@ module WebLoggerModule
 
             Communications.makeWebRequest(url, params, options, method(:onReceiveSyncLogs));
         }
-
-        function onReceiveSyncLogs(responseCode as Number, data as Dictionary?) as Void {
-
-            WebLoggerModule.webLogger.Log(LogDebug, "Response" + data);            // print response code
-            
-        } 
     }
     var webLogger;
 }

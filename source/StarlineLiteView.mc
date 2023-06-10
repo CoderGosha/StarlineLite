@@ -34,33 +34,33 @@ class StarlineLiteView extends WatchUi.View {
     
     function updateLabels(){
         var carState = mController.GetCarState();
-        if (mController.AppState == NULL_CREDENTIAL)
+        if (mController.appState == NULL_CREDENTIAL)
         {
             mLabelTitle.setText("Check settings");
             mLabelTemp.setText("");
             mLabelUpdate.setText("Invalid credentials");
         }
-        else if (mController.AppState == NETWORK_ERROR)
+        else if (mController.appState == NETWORK_ERROR)
         {
             mLabelTitle.setText("Network error");
             mLabelTemp.setText("");
             mLabelUpdate.setText("");
         }
-        else if (mController.AppState == NULL_API_KEY_OR_ID)
+        else if (mController.appState == NULL_API_KEY_OR_ID)
         {
             mLabelTitle.setText("Check settings");
             mLabelTemp.setText("");
             mLabelUpdate.setText("Invalid APP Id or APP KEY");
         }
 
-        else if (mController.AppState == ERROR_PROXY_RESPONSE)
+        else if (mController.appState == ERROR_PROXY_RESPONSE)
         {
             mLabelTitle.setText("Sync error");
             mLabelTemp.setText("");
             mLabelUpdate.setText("Proxy error");      
         }
 
-        else if (mController.AppState == ERROR_RESPONSE)
+        else if (mController.appState == ERROR_RESPONSE)
         {
             mLabelTitle.setText("Sync error");
             mLabelTemp.setText("");
@@ -73,13 +73,13 @@ class StarlineLiteView extends WatchUi.View {
             }
             
         }
-        else if (mController.AppState == UPDATING)
+        else if (mController.appState == UPDATING)
         {
             mLabelTitle.setText("Sync Starline");
             mLabelTemp.setText("");
             mLabelUpdate.setText("Synchronization...");
         }
-        else if (mController.AppState == SEND_COMMAND)
+        else if (mController.appState == SEND_COMMAND)
         {
             // mLabelTitle.setText("Sync Starline");
             // mLabelTemp.setText("");

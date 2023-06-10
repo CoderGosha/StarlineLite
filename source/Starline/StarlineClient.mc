@@ -1,5 +1,6 @@
 using Toybox.StringUtil;
 using Toybox.Cryptography;
+using Toybox.Lang;
 
 public enum StralineCommand{
     CommandLock = "CommanLock",
@@ -27,7 +28,7 @@ class StarlineClient
     function GetAuthState() as eAuthStatus {
         return mAuthService.AuthStatus;
     }
-    function GetAuthError() as String {
+    function GetAuthError() as Lang.String {
         return mAuthService.GetAuthError();
     }
     function RefreshCarState(refresh_callback) {
@@ -73,13 +74,13 @@ class StarlineClient
 
     }
 
-    function onReceiveGetUserData(responseCode as Number, data as Dictionary?) as Void {
+    function onReceiveGetUserData(responseCode as Lang.Number, data as Null or Lang.Dictionary or Lang.String) as Void{
 
         if (responseCode == 200) {
             WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
-            var code = data.get("code");
+            var code = data.get("code") as Lang.Number;
             if (code.toNumber() == 200){
-                var device = data.get("devices");
+                var device = data.get("devices") as Lang.Array;
                 if ((device != null) && (device.size() > 0)){
                     mCarState.SetProperty(device[0]);
 
@@ -88,7 +89,7 @@ class StarlineClient
                 return;
             }
             else{
-                mCarState.ErrorMessage = data.get("codestring");
+                mCarState.ErrorMessage = data.get("codestring").toString();
             }
                             
         } else {
@@ -103,15 +104,15 @@ class StarlineClient
         mRefreshCarState_callback.invoke();
     } 
 
-    function RefreshCredentials(login as String, pass as String, url as String) {
+    function RefreshCredentials(login as Lang.String, pass as Lang.String, url as Lang.String) {
         mAuthService.RefreshCredentials(login, pass, url);
     }
 
-    function SendCommand(command_callback, command) {
+    function SendCommand(command_callback, command) as Void{
         mCommand_callback = command_callback;
         if (mCarState.DeviceId == null)
         {
-            return false;
+            return;
         }
 
         OnSendCommand(command);
@@ -176,18 +177,19 @@ class StarlineClient
         Communications.makeWebRequest(url, params, options, method(:onReceiveSendCommand));
     }
 
-    function onReceiveSendCommand(responseCode as Number, data as Dictionary?) as Void {
+    function onReceiveSendCommand(responseCode as Lang.Number, data as Null or Lang.Dictionary or Lang.String) as Void
+    {
 
         if (responseCode == 200) {
             WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
-            var code = data.get("code");
+            var code = data.get("code") as Lang.Number;
             if (code.toNumber() == 200){
                 mCarState.SetResultCommand(data);
                 mCommand_callback.invoke();
                 return;
             }
             else{
-                mCarState.ErrorMessage = data.get("codestring");
+                mCarState.ErrorMessage = data.get("codestring").toString();
             }
                             
         } 

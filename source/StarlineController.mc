@@ -4,32 +4,35 @@ using Toybox.WatchUi;
 
 using Toybox.WatchUi;
 using Toybox.System;
+using Toybox.Lang;
+
+
 
 public enum AppState {
-    IDLE = "IDLE",
-    SEND_COMMAND = "SEND_COMMAND",
-    UPDATING = "UPDATING",
-    NULL_CREDENTIAL = "NULL_CREDENTIAL",
-    ERROR_RESPONSE = "ERROR_RESPONSE",
-    NULL_API_KEY_OR_ID= "NULL_API_KEY_OR_ID",
-    ERROR_PROXY_RESPONSE = "ERROR_PROXY_RESPONSE",
-    NETWORK_ERROR = "NETWORK_ERROR",
+    IDLE = 1,
+    SEND_COMMAND = 2,
+    UPDATING = 3,
+    NULL_CREDENTIAL = 4,
+    ERROR_RESPONSE = 5,
+    NULL_API_KEY_OR_ID= 6,
+    ERROR_PROXY_RESPONSE = 7,
+    NETWORK_ERROR = 8
 }
 
 class StarlineController
 {
-    public var AppState as AppState;
+    public var appState as AppState;
 
     var mTimer;
     var mCarState as CarState;
-    var mLogin as String;
-    var mPass as String;
-    var mUrl as String;
+    var mLogin as Lang.String or Null;
+    var mPass as Lang.String or Null;
+    var mUrl as Lang.String or Null;
     var mStarlineClient as StarlineClient;
-    var mAppId as String;
-    var mAppSecret as String;
-     var mLastError as String;
-     var backgroundUpdateProcess as Boolean;
+    var mAppId as Lang.String or Null;
+    var mAppSecret as Lang.String or Null;
+     var mLastError as Lang.String;
+     var backgroundUpdateProcess as Lang.Boolean;
      var backgroundUpdateProcessTimer as Timer.Timer;
 
     // Initialize the controller
@@ -39,7 +42,7 @@ class StarlineController
         WebLoggerModule.webLogger.Log(LogDebug, "Starting App");
         CacheModule.FakeInit(Application.Properties.getValue("USE_CACHE"), Application);
         mTimer = null;
-        AppState = IDLE;
+        appState = IDLE;
         mCarState = new CarState();
         mStarlineClient = new StarlineClient();
         //mAppState = AppState.IDLE;
@@ -54,28 +57,30 @@ class StarlineController
     function CheckNetWork() {
         var isConnected = System.getDeviceSettings().connectionAvailable;
         if (!isConnected){
-            AppState = NETWORK_ERROR;
+            appState = NETWORK_ERROR;
         }
         
     }
 
-    function SendCommand(command as StarlineCommand) {
-        AppState = SEND_COMMAND;
+    function SendCommand(command) {
+        appState = SEND_COMMAND;
         mStarlineClient.SendCommand(method(:UpdateCarState), command);
     }
 
     function RefreshCarState() 
     {
         try {
-            mLastError.toNumber();
-            if (((AppState == IDLE) || (AppState == ERROR_RESPONSE)) && (CheckAccess()))
+            if (((appState == IDLE) || (appState == ERROR_RESPONSE)) && (CheckAccess()))
             {
-                AppState = UPDATING;
+                appState = UPDATING;
                 mStarlineClient.RefreshCarState(method(:UpdateCarState));
+            }
+            else {
+                WatchUi.requestUpdate(); 
             }
         }
         catch( ex ) {
-            AppState = ERROR_RESPONSE;
+            appState = ERROR_RESPONSE;
             mLastError = ex.getErrorMessage();
             WatchUi.requestUpdate(); 
         }
@@ -92,24 +97,24 @@ class StarlineController
 
         if (authStatus != Ready){
             if (authStatus == InvalidLoginOrPass){
-                 AppState = NULL_CREDENTIAL;
+                 appState = NULL_CREDENTIAL;
                  mLastError = authError;
             }
 
             if (authStatus == InvalidAPPIdORAPPSecret){
-                 AppState = NULL_API_KEY_OR_ID;
+                 appState = NULL_API_KEY_OR_ID;
                  mLastError = authError;
             }
 
            if (authStatus == ErrorProxy){
-                 AppState = ERROR_PROXY_RESPONSE;
+                 appState = ERROR_PROXY_RESPONSE;
                  mLastError = authError;
             }
         }
         else {
             var state = mStarlineClient.GetCarState();
             if (state.StatusCode != 200){
-                AppState = ERROR_RESPONSE;
+                appState = ERROR_RESPONSE;
             }
             //else if (state.StatusCode == -2){
             //    // костыль для автозапуска
@@ -119,14 +124,14 @@ class StarlineController
             //    return;
            // }
             else {
-                AppState = IDLE;
+                appState = IDLE;
             }
         }
 
         WatchUi.requestUpdate(); 
     }
 
-    function UpdateCarStateBackground() 
+    function UpdateCarStateBackground() as Void
     {
         if (backgroundUpdateProcess){
             return;
@@ -134,7 +139,7 @@ class StarlineController
 
         try {
             backgroundUpdateProcess = true;
-            if (((AppState == IDLE) || (AppState == ERROR_RESPONSE)) && (CheckAccess()))
+            if (((appState == IDLE) || (appState == ERROR_RESPONSE)) && (CheckAccess()))
             {
                 mStarlineClient.RefreshCarState(method(:UpdateCarStateBackgroundCallBack));
             }
@@ -181,13 +186,13 @@ class StarlineController
         return true;
     }
 
-    function CheckAccess() as Boolean
+    function CheckAccess() as Lang.Boolean
     {
         UpdateCredentials();
         
         if ((mLogin.hashCode() == "".hashCode()) 
         || (mPass.hashCode() == "".hashCode())){
-            AppState = NULL_CREDENTIAL;
+            appState = NULL_CREDENTIAL;
             mLastError = "Empty settings";
             WebLoggerModule.webLogger.Log(LogError, "NULL_CREDENTIAL");
             return false;
@@ -195,7 +200,7 @@ class StarlineController
 
         if ((mAppId.hashCode() == "".hashCode()) 
         || (mAppSecret.hashCode() == "".hashCode())){
-            AppState = NULL_API_KEY_OR_ID;
+            appState = NULL_API_KEY_OR_ID;
             mLastError = "Empty settings";
             WebLoggerModule.webLogger.Log(LogError, "NULL_API_KEY_OR_ID");
             return false;

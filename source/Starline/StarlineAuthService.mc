@@ -1,26 +1,27 @@
 
+using Toybox.Lang;
 
 class StarlineAuthService{
-    var mLogin as String;
-    var mPass as String;
-    var mUrl as String;
-    var mAppId as String;
-    var mAppSecret as String;
-    var mIsAuth as Boolean;
-    var mIsDirectAuth as Boolean;
+    var mLogin as Lang.String or Null;
+    var mPass as Lang.String or Null;
+    var mUrl as Lang.String or Null;
+    var mAppId as Lang.String;
+    var mAppSecret as Lang.String;
+    var mIsAuth as Lang.Boolean;
+    var mIsDirectAuth as Lang.Boolean;
 
-    var mCode as String;
-    var mToken as String;
-    public var mSlid as String;
-    var mUserId as String;
-    var mSlnet as String;
-    var mSlnetDate as Number;
+    var mCode as Lang.String or Null;
+    var mToken as Lang.String or Null;
+    public var mSlid as Lang.String or Null;
+    var mUserId as Lang.String or Null;
+    var mSlnet as Lang.String or Null;
+    var mSlnetDate as Lang.Number or Null;
 
     var mAuth_callback;
 
-    var mProxyUrl as String;
-    var mLastError as String;
-    var mUseCache as Boolean;
+    var mProxyUrl as Lang.String;
+    var mLastError as Lang.String;
+    var mUseCache as Lang.Boolean;
 
     public var AuthStatus as eAuthStatus;
 
@@ -35,18 +36,18 @@ class StarlineAuthService{
         mUseCache = Application.Properties.getValue("USE_CACHE");
     }
 
-    function RefreshCredentials(login as String, pass as String, url as String) {
+    function RefreshCredentials(login as Lang.String, pass as Lang.String, url as Lang.String) {
         mLogin = login;
         mPass = pass;
         mUrl = url;
     }
 
-    function Auth() as Boolean{
+    function Auth()
+    {
         GetCode();
-
     }
     
-    function GetSlnet(auth_callback) as String {
+    function GetSlnet(auth_callback) as Lang.String or Null{
         mAuth_callback = auth_callback;
         
         var current_time = GetDataToLong();
@@ -68,9 +69,10 @@ class StarlineAuthService{
         }
 
         GetCode();
+        return null;
     }
 
-    function GetUserId() as string
+    function GetUserId() as Lang.String
     {
         if (mUserId != null)
         {
@@ -96,7 +98,7 @@ class StarlineAuthService{
 		return StringUtil.convertEncodedString(byte, options);
 	}
 
-    function GetMD5(text) as String{
+    function GetMD5(text) as Lang.String or Null{
         try {
             var hasher = new Cryptography.Hash({:algorithm => Cryptography.HASH_MD5});
             hasher.update(string_to_byte(text));
@@ -107,10 +109,10 @@ class StarlineAuthService{
         catch( ex ) {
              FinalAuth(AuthUndefined);  
         }
-  
+        return null;
     }
 
-    function GetSHA1(text) as String{
+    function GetSHA1(text) as Lang.String{
         var hasher = new Cryptography.Hash({:algorithm => Cryptography.HASH_SHA1});
         hasher.update(string_to_byte(text));
         var hash_byte = hasher.digest();
@@ -145,25 +147,25 @@ class StarlineAuthService{
         Communications.makeWebRequest(url, params, options, method(:onReceiveGetCode));
     }
 
-     function onReceiveGetCode(responseCode as Number, data as Dictionary?) as Void {
+     function onReceiveGetCode(responseCode as Lang.Number, data as Null or Lang.Dictionary or Lang.String) as Void{
 
         if (responseCode == 200) {
             WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
             var states = data.get("state");
             if (states == 1)
             {    
-                var desc = data.get("desc");
+                var desc = data.get("desc") as Lang.Dictionary;
                 if (desc != null) {
-                    var app_code = desc.get("code");
+                    var app_code = desc.get("code") as Lang.String;
                     if (app_code != null){
                         WebLoggerModule.webLogger.Log(LogDebug,"Got new app code: " + app_code); 
                         mCode = app_code;
-                        return GetToken(); 
+                        GetToken(); 
                     }
                 }
             }
             else {
-                mLastError = "InvalidAPPIdORAPPSecret: " + data.get("desc").get("message");
+                mLastError = "InvalidAPPIdORAPPSecret: " + (data.get("desc") as Lang.Dictionary).get("message").toString();
             }
                             
         } else {
@@ -205,25 +207,25 @@ class StarlineAuthService{
         Communications.makeWebRequest(url, params, options, method(:onReceiveGetToken));
     }
 
-    function onReceiveGetToken(responseCode as Number, data as Dictionary?) as Void {
+    function onReceiveGetToken(responseCode as Lang.Number, data as Null or Lang.Dictionary or Lang.String) as Void{
 
         if (responseCode == 200) {
             WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
             var states = data.get("state");
             if (states == 1)
             {    
-                var desc = data.get("desc");
+                var desc = data.get("desc") as Lang.Dictionary;
                 if (desc != null) {
                 var token = desc.get("token");
                     if (token != null){
                         WebLoggerModule.webLogger.Log(LogDebug,"Got new token: " + token); 
-                        mToken = token;
-                        return GetSlId(); 
+                        mToken = token.toString();
+                        GetSlId(); 
                     }
                 }
             }
             else {
-                mLastError = "InvalidAPPIdORAPPSecret: " + data.get("desc").get("message");
+                mLastError = "InvalidAPPIdORAPPSecret: " + (data.get("desc") as Lang.Dictionary).get("message").toString();
             }
                             
         } else {
@@ -265,25 +267,25 @@ class StarlineAuthService{
         Communications.makeWebRequest(url, params, options, method(:onReceiveGetSlId));
     }
 
-    function onReceiveGetSlId(responseCode as Number, data as Dictionary?) as Void {
+    function onReceiveGetSlId(responseCode as Lang.Number, data as Null or Lang.Dictionary or Lang.String) as Void{
 
         if (responseCode == 200) {
             WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
             var states = data.get("state");
             if (states == 1)
             {    
-                var desc = data.get("desc");
+                var desc = data.get("desc") as Lang.Dictionary;
                 if (desc != null) {
                 var slid = desc.get("user_token");
                     if (slid != null){
                         WebLoggerModule.webLogger.Log(LogDebug,"Got new slid: " + slid); 
-                        mSlid = slid;
-                        return GetSlnetToken();
+                        mSlid = slid.toString();
+                        GetSlnetToken();
                     }
                 }
             }
             else {
-                mLastError = "InvalidLoginOrPass: " + data.get("desc").get("message");
+                mLastError = "InvalidLoginOrPass: " + (data.get("desc") as Lang.Dictionary).get("message").toString();
             }
                             
         } else {
@@ -344,11 +346,11 @@ class StarlineAuthService{
         Communications.makeWebRequest(url, params, options, method(:onReceiveGetSlnet));
     }
 
-    function onReceiveGetSlnet(responseCode as Number, data as Dictionary?) as Void {
+    function onReceiveGetSlnet(responseCode as Lang.Number, data as Null or Lang.Dictionary or Lang.String) as Void{
 
         if (responseCode == 200) {
             WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
-            var code = data.get("code");
+            var code = data.get("code") as Lang.Number;
             if (code.toNumber() == 200){
                 mSlnet = null; // data.get("nchan_id"); // Нужно брать из куков! 
                 mSlnetDate = GetDataToLong() + 24 * 60 * 60;
@@ -396,7 +398,7 @@ class StarlineAuthService{
         Communications.makeWebRequest(url, params, options, method(:onReceiveGetSlnetWithProxy));
     }
 
-    function onReceiveGetSlnetWithProxy(responseCode as Number, data as Dictionary?) as Void {
+    function onReceiveGetSlnetWithProxy(responseCode as Lang.Number, data as Null or Lang.Dictionary or Lang.String) as Void{
         //
         if (responseCode == 200) {
             WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
@@ -420,27 +422,7 @@ class StarlineAuthService{
         FinalAuth(ErrorProxy);
     } 
 
-      function onReceiveTestSlid(responseCode as Number, data as Dictionary?) as Void {
-
-        if (responseCode == 200) {
-            WebLoggerModule.webLogger.Log(LogDebug,"Request Successful"); 
-                            
-        } else {
-            WebLoggerModule.webLogger.Log(LogDebug,"Response: " + responseCode + ":" + data);            // print response code
-            return;
-        }
-
-        mCarState.StatusCode = 500;
-        WebLoggerModule.webLogger.Log(LogDebug,"Error parse response" + data);            // print response code
-        
-    } 
-
-    function GetDataToLong() as Number {
-        // var now = new Time.Moment(Time.now().value());
-        return Time.now().value();
-    }
-
-    function CheckAuth() as Boolean {
+    function CheckAuth() as Lang.Boolean {
         if (!mIsAuth)
         {
             return Auth();
@@ -451,15 +433,15 @@ class StarlineAuthService{
 
 
 
-    function GetCacheProperty(name_property, date_property, sec as Number) {
+    function GetCacheProperty(name_property, date_property, sec as Lang.Number) {
         if (!mUseCache)
         {
             WebLoggerModule.webLogger.Log(LogDebug, "Skip properties cache " + name_property + ":" + date_property); 
             return null;
         }
         try {
-            var mProperyDate = Application.Properties.getValue(date_property) as Number;
-            var mPropery = Application.Properties.getValue(name_property) as String;
+            var mProperyDate = Application.Properties.getValue(date_property) as Lang.Number;
+            var mPropery = Application.Properties.getValue(name_property) as Lang.String;
             var current_time = GetDataToLong();
             if (mProperyDate == 0)
                 {return null;}
@@ -478,15 +460,15 @@ class StarlineAuthService{
         return null;
     }
 
-    function SetCacheProperty(name_property, date_property, value, sec as Number) {
+    function SetCacheProperty(name_property, date_property, value, sec as Lang.Number) {
         if (!mUseCache)
         {
             return;
         }
 
         var current_time = GetDataToLong() + sec;
-        Application.Properties.setValue(name_property as String, value);
-        Application.Properties.setValue(date_property as Number, current_time);
+        Application.Properties.setValue(name_property as Lang.String, value);
+        Application.Properties.setValue(date_property as Lang.Number, current_time);
     }
 
     function GetAuthError() {

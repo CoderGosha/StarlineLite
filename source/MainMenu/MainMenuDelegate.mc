@@ -27,43 +27,36 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
 
         if (labelId == :about)
         {
-            WatchUi.pushView(new Rez.Layouts.MenuAbout(), new MenuAboutDelegat(), WatchUi.SLIDE_UP);
-            return true;
+            WatchUi.pushView(new MenuAbout(), new MenuAboutDelegat(), WatchUi.SLIDE_UP);
         }
         else if (labelId == :debug)
         {
-            WatchUi.pushView(new Rez.Layouts.MenuDebug(), new MenuDebugDelegat(), WatchUi.SLIDE_UP);
-            return true;
+            WatchUi.pushView(new MenuDebug(), new MenuDebugDelegat(), WatchUi.SLIDE_UP);
         }
         else if (labelId == :lock)
         {
             mController.SendCommand(CommandLock);
             onBack();
-            return true;
         }
         else if (labelId == :unlock)
         {
             mController.SendCommand(CommandUnlock);
             onBack();
-            return true;
         }
         else if (labelId == :remote_start)
         {
             mController.SendCommand(CommandRemoteStart);
             onBack();
-            return true;
         }
         else if (labelId == :stop)
         {
             mController.SendCommand(CommandStop);
             onBack();
-            return true;
         }
         else if (labelId == :gocar)
         {
             mController.GoToCar();
             onBack();
-            return true;
         }
         else if (labelId == :refresh)
         {
@@ -74,16 +67,13 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             // );
             //WatchUi.pushView(progressBar, new MenuProgressDelegate(), WatchUi.SLIDE_DOWN);
             onBack();
-            return true;
         }
 
         else if (labelId == :sync_logs)
         {
             mController.SyncLog();
             onBack();
-            return true;
         }
-        return true;
     }
 
 }
