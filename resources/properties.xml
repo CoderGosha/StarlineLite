@@ -17,5 +17,5 @@
 	<property id="starline_API_proxy_user" type="string">starline</property>
 	<property id="starline_API_proxy_pass" type="string">erdfghjkljhgfdxcvbnjkliuytrdf</property>
 	<property id="initialization" type="boolean">false</property>
-	<property id="USE_CACHE" type="boolean">true</property>
+	<property id="starline_API_car_index" type="number">1</property>
 </properties>

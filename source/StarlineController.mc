@@ -16,7 +16,8 @@ public enum AppState {
     ERROR_RESPONSE = 5,
     NULL_API_KEY_OR_ID= 6,
     ERROR_PROXY_RESPONSE = 7,
-    NETWORK_ERROR = 8
+    NETWORK_ERROR = 8,
+    UNINIT = 9,
 }
 
 class StarlineController
@@ -31,26 +32,25 @@ class StarlineController
     var mStarlineClient as StarlineClient;
     var mAppId as Lang.String or Null;
     var mAppSecret as Lang.String or Null;
-     var mLastError as Lang.String;
-     var backgroundUpdateProcess as Lang.Boolean;
-     var backgroundUpdateProcessTimer as Timer.Timer;
+    var mLastError as Lang.String;
+    var backgroundUpdateProcess as Lang.Boolean;
+    var backgroundUpdateProcessTimer as Timer.Timer;
 
     // Initialize the controller
     function initialize() {
         // Allocate a timer
         WebLoggerModule.webLogger = new WebLoggerModule.WebLogger();
         WebLoggerModule.webLogger.Log(LogDebug, "Starting App");
-        CacheModule.FakeInit(Application.Properties.getValue("USE_CACHE"), Application);
         mTimer = null;
-        appState = IDLE;
+        appState = UNINIT;
         mCarState = new CarState();
         mStarlineClient = new StarlineClient();
-        //mAppState = AppState.IDLE;
         Application.Properties.setValue("initialization", true);
         mLastError = "Empty error";
         backgroundUpdateProcess = false;
         backgroundUpdateProcessTimer = new Timer.Timer();
-        backgroundUpdateProcessTimer.start(method(:UpdateCarStateBackground), 15000, true);
+        backgroundUpdateProcessTimer.start(method(:UpdateCarStateBackground), 30000, true);
+        RefreshCarState();
         CheckNetWork();
     }
 
@@ -64,19 +64,25 @@ class StarlineController
 
     function SendCommand(command) {
         appState = SEND_COMMAND;
-        mStarlineClient.SendCommand(method(:UpdateCarState), command);
+        mStarlineClient.SendCommand(method(:UpdateAppState), command);
     }
 
     function RefreshCarState() 
     {
+        if (appState == NETWORK_ERROR) {
+            return;
+        }
+        
+        if (CredentialsIsNull()){
+            WatchUi.requestUpdate();
+            return;
+        }
+
         try {
-            if (((appState == IDLE) || (appState == ERROR_RESPONSE)) && (CheckAccess()))
+            if ((appState == IDLE) || (appState == ERROR_RESPONSE) || (appState == UNINIT))
             {
                 appState = UPDATING;
-                mStarlineClient.RefreshCarState(method(:UpdateCarState));
-            }
-            else {
-                WatchUi.requestUpdate(); 
+                mStarlineClient.RefreshCarState(method(:UpdateAppState));
             }
         }
         catch( ex ) {
@@ -91,7 +97,7 @@ class StarlineController
         return mLastError;
     }
 
-    function UpdateCarState() {
+    function UpdateAppState() {
         var authStatus = mStarlineClient.GetAuthState();
         var authError = mStarlineClient.GetAuthError();
 
@@ -116,13 +122,6 @@ class StarlineController
             if (state.StatusCode != 200){
                 appState = ERROR_RESPONSE;
             }
-            //else if (state.StatusCode == -2){
-            //    // костыль для автозапуска
-            //    AppState = IDLE;
-            //    WatchUi.requestUpdate(); 
-            //    mStarlineClient.RefreshCarState(method(:UpdateCarState));
-            //    return;
-           // }
             else {
                 appState = IDLE;
             }
@@ -139,10 +138,7 @@ class StarlineController
 
         try {
             backgroundUpdateProcess = true;
-            if (((appState == IDLE) || (appState == ERROR_RESPONSE)) && (CheckAccess()))
-            {
-                mStarlineClient.RefreshCarState(method(:UpdateCarStateBackgroundCallBack));
-            }
+            RefreshCarState();
         }
         catch( ex ) {
             WebLoggerModule.webLogger.Log(LogError, "Error background update: " + ex.getErrorMessage());
@@ -154,12 +150,12 @@ class StarlineController
         }
     }
 
-    function UpdateCarStateBackgroundCallBack() {
-        var state = mStarlineClient.GetCarState();
-         if (state.StatusCode == 200){
-            WatchUi.requestUpdate(); 
-         }
-    }
+    // function UpdateCarStateBackgroundCallBack() {
+    //     var state = mStarlineClient.GetCarState();
+    //      if (state.StatusCode == 200){
+    //         WatchUi.requestUpdate(); 
+    //      }
+    // }
 
     function GetCarState() as CarState {
         return mStarlineClient.GetCarState();
@@ -174,11 +170,11 @@ class StarlineController
         mStarlineClient.RefreshCredentials(mLogin, mPass, mUrl);
     }
 
-    function GoToCar() {
-        var state = mStarlineClient.GetCarState();
-        var position_car = state.position_car;
-        return true;
-    }
+    // function GoToCar() {
+    //     var state = mStarlineClient.GetCarState();
+    //     var position_car = state.position_car;
+    //     return true;
+    // }
 
     function SyncLog() {
         WebLoggerModule.webLogger.Log(LogInfo, "Start SyncLogs");
@@ -186,7 +182,7 @@ class StarlineController
         return true;
     }
 
-    function CheckAccess() as Lang.Boolean
+    function CredentialsIsNull() as Lang.Boolean
     {
         UpdateCredentials();
         
@@ -195,7 +191,7 @@ class StarlineController
             appState = NULL_CREDENTIAL;
             mLastError = "Empty settings";
             WebLoggerModule.webLogger.Log(LogError, "NULL_CREDENTIAL");
-            return false;
+            return true;
         }
 
         if ((mAppId.hashCode() == "".hashCode()) 
@@ -203,10 +199,10 @@ class StarlineController
             appState = NULL_API_KEY_OR_ID;
             mLastError = "Empty settings";
             WebLoggerModule.webLogger.Log(LogError, "NULL_API_KEY_OR_ID");
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     // Handle timing out after exit

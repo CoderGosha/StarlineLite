@@ -13,5 +13,5 @@
     <string id="LayoutLock">Lock/Unlock</string>
     <string id="APP_ID">APP_ID</string>
     <string id="API_SECRET">API_SECRET</string>
-     <string id="USE_CACHE">USE CACHE</string>
+    <string id="CAR_INDEX">CAR INDEX</string>
 </strings>

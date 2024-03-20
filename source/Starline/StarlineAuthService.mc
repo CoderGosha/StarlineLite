@@ -33,7 +33,7 @@ class StarlineAuthService{
         mProxyUrl = Application.Properties.getValue("starline_API_proxy_url");
         AuthStatus = AuthUndefined;
         mLastError = "Empty";
-        mUseCache = Application.Properties.getValue("USE_CACHE");
+        mUseCache = true;
     }
 
     function RefreshCredentials(login as Lang.String, pass as Lang.String, url as Lang.String) {
@@ -160,7 +160,8 @@ class StarlineAuthService{
                     if (app_code != null){
                         WebLoggerModule.webLogger.Log(LogDebug,"Got new app code: " + app_code); 
                         mCode = app_code;
-                        GetToken(); 
+                        GetToken();
+                        return; 
                     }
                 }
             }
@@ -221,6 +222,7 @@ class StarlineAuthService{
                         WebLoggerModule.webLogger.Log(LogDebug,"Got new token: " + token); 
                         mToken = token.toString();
                         GetSlId(); 
+                        return; 
                     }
                 }
             }
@@ -281,6 +283,7 @@ class StarlineAuthService{
                         WebLoggerModule.webLogger.Log(LogDebug,"Got new slid: " + slid); 
                         mSlid = slid.toString();
                         GetSlnetToken();
+                        return; 
                     }
                 }
             }
