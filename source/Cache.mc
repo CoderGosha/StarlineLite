@@ -4,7 +4,7 @@ module CacheModule{
     var mUseCache = false;
     var mApplication;
     function FakeInit(useCache as Lang.Boolean, Application) {
-        mUseCache = useCache;
+        mUseCache = true;
         mApplication = Application;
 
     }

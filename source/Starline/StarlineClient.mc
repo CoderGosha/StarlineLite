@@ -44,11 +44,15 @@ class StarlineClient
     }
 
     function OnRefreshCarState() {
-        if (mAuthService.AuthStatus != Ready)
-            {
-                FinalUpdate();
-                return;
-            }
+        // Если авторизация прошла плохо то закрываем все
+        if ((mAuthService.AuthStatus == InvalidLoginOrPass) || 
+            (mAuthService.AuthStatus == InvalidAPPIdORAPPSecret) || 
+            (mAuthService.AuthStatus == ErrorProxy))
+        {
+            mRefreshCarState_callback.invoke();
+            return;
+        }
+        
         // У нас точно есть токен - поэтому выполянем 
         var token = mAuthService.GetSlnet(method(:OnRefreshCarState));
         var userId = mAuthService.GetUserId();
@@ -118,10 +122,6 @@ class StarlineClient
         OnSendCommand(command);
     }
 
-    function FinalUpdate() {
-
-        mRefreshCarState_callback.invoke();
-    }
 
     function GetCommandParams(command as StralineCommand) {
         switch (command) {

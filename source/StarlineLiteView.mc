@@ -29,7 +29,6 @@ class StarlineLiteView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-         mController.RefreshCarState();
     }
     
     function updateLabels(){
@@ -79,6 +78,14 @@ class StarlineLiteView extends WatchUi.View {
             mLabelTemp.setText("");
             mLabelUpdate.setText("Synchronization...");
         }
+        
+        else if (mController.appState == UNINIT)
+        {
+            mLabelTitle.setText("Uninit");
+            mLabelTemp.setText("");
+            mLabelUpdate.setText("");
+        }
+        
         else if (mController.appState == SEND_COMMAND)
         {
             // mLabelTitle.setText("Sync Starline");

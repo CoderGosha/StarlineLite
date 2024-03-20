@@ -53,19 +53,9 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             mController.SendCommand(CommandStop);
             onBack();
         }
-        else if (labelId == :gocar)
-        {
-            mController.GoToCar();
-            onBack();
-        }
         else if (labelId == :refresh)
         {
             mController.RefreshCarState();
-            // progressBar = new WatchUi.ProgressBar(
-            //     "Processing...",
-            //     null
-            // );
-            //WatchUi.pushView(progressBar, new MenuProgressDelegate(), WatchUi.SLIDE_DOWN);
             onBack();
         }
 
