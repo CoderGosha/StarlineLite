@@ -32,9 +32,9 @@ class StarlineController
     var mStarlineClient as StarlineClient;
     var mAppId as Lang.String or Null;
     var mAppSecret as Lang.String or Null;
-     var mLastError as Lang.String;
-    //  var backgroundUpdateProcess as Lang.Boolean;
-    //  var backgroundUpdateProcessTimer as Timer.Timer;
+    var mLastError as Lang.String;
+    var backgroundUpdateProcess as Lang.Boolean;
+    var backgroundUpdateProcessTimer as Timer.Timer;
 
     // Initialize the controller
     function initialize() {
@@ -47,9 +47,10 @@ class StarlineController
         mStarlineClient = new StarlineClient();
         Application.Properties.setValue("initialization", true);
         mLastError = "Empty error";
-       // backgroundUpdateProcess = false;
-       // backgroundUpdateProcessTimer = new Timer.Timer();
-       // backgroundUpdateProcessTimer.start(method(:UpdateCarStateBackground), 15000, true);
+        backgroundUpdateProcess = false;
+        backgroundUpdateProcessTimer = new Timer.Timer();
+        backgroundUpdateProcessTimer.start(method(:UpdateCarStateBackground), 30000, true);
+        RefreshCarState();
         CheckNetWork();
     }
 
@@ -129,28 +130,25 @@ class StarlineController
         WatchUi.requestUpdate(); 
     }
 
-    // function UpdateCarStateBackground() as Void
-    // {
-    //     if (backgroundUpdateProcess){
-    //         return;
-    //     }
+    function UpdateCarStateBackground() as Void
+    {
+        if (backgroundUpdateProcess){
+            return;
+        }
 
-    //     try {
-    //         backgroundUpdateProcess = true;
-    //         if (((appState == IDLE) || (appState == ERROR_RESPONSE)) && (CheckAccess()))
-    //         {
-    //             mStarlineClient.RefreshCarState(method(:UpdateCarStateBackgroundCallBack));
-    //         }
-    //     }
-    //     catch( ex ) {
-    //         WebLoggerModule.webLogger.Log(LogError, "Error background update: " + ex.getErrorMessage());
-    //         WatchUi.requestUpdate(); 
-    //     }
-    //     finally
-    //     {
-    //         backgroundUpdateProcess = false;
-    //     }
-    // }
+        try {
+            backgroundUpdateProcess = true;
+            RefreshCarState();
+        }
+        catch( ex ) {
+            WebLoggerModule.webLogger.Log(LogError, "Error background update: " + ex.getErrorMessage());
+            WatchUi.requestUpdate(); 
+        }
+        finally
+        {
+            backgroundUpdateProcess = false;
+        }
+    }
 
     // function UpdateCarStateBackgroundCallBack() {
     //     var state = mStarlineClient.GetCarState();
