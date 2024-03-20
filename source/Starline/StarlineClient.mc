@@ -16,9 +16,16 @@ class StarlineClient
     var mRefreshCarState_callback;
     var mCommand_callback;
 
+     var mCarIndex as Lang.Number;
+
     function initialize() {
         mCarState = new CarState();
         mAuthService = new StarlineAuthService();
+        mCarIndex = Application.Properties.getValue("starline_API_car_index");
+        if (mCarIndex <= 0)
+        {
+            mCarIndex = 1;
+        }
     }
 
     function GetCarState() as CarState {
@@ -52,7 +59,7 @@ class StarlineClient
             mRefreshCarState_callback.invoke();
             return;
         }
-        
+
         // У нас точно есть токен - поэтому выполянем 
         var token = mAuthService.GetSlnet(method(:OnRefreshCarState));
         var userId = mAuthService.GetUserId();
@@ -85,8 +92,8 @@ class StarlineClient
             var code = data.get("code") as Lang.Number;
             if (code.toNumber() == 200){
                 var device = data.get("devices") as Lang.Array;
-                if ((device != null) && (device.size() > 0)){
-                    mCarState.SetProperty(device[0]);
+                if ((device != null) && (device.size() > 0) && (device.size() > mCarIndex - 1)){
+                    mCarState.SetProperty(device[mCarIndex - 1]);
 
                 }
                 mRefreshCarState_callback.invoke();
